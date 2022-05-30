@@ -3,157 +3,152 @@ import XCTest
 
 
 final class AbsDiffEqFloatTests: XCTestCase {
-    func testBasic() {
+    func testBasicEq() {
         XCTAssert(Float(1.0).absDiffEq(Float(1.0)))
         XCTAssert(Float(1.0).absDiffNe(Float(2.0)))
     }
 
-    /*
-    #[should_panic]
-    func testBasicPanicEq() {
-        assert_abs_diff_eq!(1.0f32, 2.0f32);
-    }
-
-    #[should_panic]
-    func testBasicPanicNe() {
-        assert_abs_diff_ne!(1.0f32, 1.0f32);
+    func testBasicNe() {
+        XCTAssert(1.0.absDiffEq(2.0))
     }
 
     func testBig() {
-        assert_abs_diff_eq!(100000000.0f32, 100000001.0f32);
-        assert_abs_diff_eq!(100000001.0f32, 100000000.0f32);
-        assert_abs_diff_ne!(10000.0f32, 10001.0f32);
-        assert_abs_diff_ne!(10001.0f32, 10000.0f32);
+        XCTAssert(Float(100000000.0).absDiffEq(Float(100000001.0)))
+        XCTAssert(Float(100000001.0).absDiffEq(Float(100000000.0)))
+        XCTAssert(Float(10000.0).absDiffEq(Float(10001.0)))
+        XCTAssert(Float(10001.0).absDiffEq(Float(10000.0)))
     }
 
     func testBigNeg() {
-        assert_abs_diff_eq!(-100000000.0f32, -100000001.0f32);
-        assert_abs_diff_eq!(-100000001.0f32, -100000000.0f32);
-        assert_abs_diff_ne!(-10000.0f32, -10001.0f32);
-        assert_abs_diff_ne!(-10001.0f32, -10000.0f32);
+        XCTAssert(Float(-100000000.0).absDiffEq(Float(-100000001.0)))
+        XCTAssert(Float(-100000001.0).absDiffEq(Float(-100000000.0)))
+        XCTAssert(Float(-10000.0).absDiffEq(Float(-10001.0)))
+        XCTAssert(Float(-10001.0).absDiffEq(Float(-10000.0)))
     }
 
     func testMid() {
-        assert_abs_diff_eq!(1.0000001f32, 1.0000002f32);
-        assert_abs_diff_eq!(1.0000002f32, 1.0000001f32);
-        assert_abs_diff_ne!(1.000001f32, 1.000002f32);
-        assert_abs_diff_ne!(1.000002f32, 1.000001f32);
+        XCTAssert(Float(1.0000001).absDiffEq(Float(1.0000002)))
+        XCTAssert(Float(1.0000002).absDiffEq(Float(1.0000001)))
+        XCTAssert(Float(1.000001).absDiffEq(Float(1.000002)))
+        XCTAssert(Float(1.000002).absDiffEq(Float(1.000001)))
     }
 
     func testMidNeg() {
-        assert_abs_diff_eq!(-1.0000001f32, -1.0000002f32);
-        assert_abs_diff_eq!(-1.0000002f32, -1.0000001f32);
-        assert_abs_diff_ne!(-1.000001f32, -1.000002f32);
-        assert_abs_diff_ne!(-1.000002f32, -1.000001f32);
+        XCTAssert(Float(-1.0000001).absDiffEq(Float(-1.0000002)))
+        XCTAssert(Float(-1.0000002).absDiffEq(Float(-1.0000001)))
+        XCTAssert(Float(-1.000001).absDiffEq(Float(-1.000002)))
+        XCTAssert(Float(-1.000002).absDiffEq(Float(-1.000001)))
     }
 
     func testSmall() {
-        assert_abs_diff_eq!(0.000010001f32, 0.000010002f32);
-        assert_abs_diff_eq!(0.000010002f32, 0.000010001f32);
-        assert_abs_diff_ne!(0.000001002f32, 0.0000001001f32);
-        assert_abs_diff_ne!(0.000001001f32, 0.0000001002f32);
+        XCTAssert(Float(0.000010001).absDiffEq(Float(0.000010002)))
+        XCTAssert(Float(0.000010002).absDiffEq(Float(0.000010001)))
+        XCTAssert(Float(0.000001002).absDiffEq(Float(0.0000001001)))
+        XCTAssert(Float(0.000001001).absDiffEq(Float(0.0000001002)))
     }
 
     func testSmallNeg() {
-        assert_abs_diff_eq!(-0.000010001f32, -0.000010002f32);
-        assert_abs_diff_eq!(-0.000010002f32, -0.000010001f32);
-        assert_abs_diff_ne!(-0.000001002f32, -0.0000001001f32);
-        assert_abs_diff_ne!(-0.000001001f32, -0.0000001002f32);
+        XCTAssert(Float(-0.000010001).absDiffEq(Float(-0.000010002)))
+        XCTAssert(Float(-0.000010002).absDiffEq(Float(-0.000010001)))
+        XCTAssert(Float(-0.000001002).absDiffEq(Float(-0.0000001001)))
+        XCTAssert(Float(-0.000001001).absDiffEq(Float(-0.0000001002)))
     }
 
     func testZero() {
-        assert_abs_diff_eq!(0.0f32, 0.0f32);
-        assert_abs_diff_eq!(0.0f32, -0.0f32);
-        assert_abs_diff_eq!(-0.0f32, -0.0f32);
+        XCTAssert(Float(0.0).absDiffEq(Float(0.0)))
+        XCTAssert(Float(0.0).absDiffEq(Float(-0.0)))
+        XCTAssert(Float(-0.0).absDiffEq(Float(-0.0)))
 
-        assert_abs_diff_ne!(0.000001f32, 0.0f32);
-        assert_abs_diff_ne!(0.0f32, 0.000001f32);
-        assert_abs_diff_ne!(-0.000001f32, 0.0f32);
-        assert_abs_diff_ne!(0.0f32, -0.000001f32);
+        XCTAssert(Float(0.000001).absDiffEq(Float(0.0)))
+        XCTAssert(Float(0.0).absDiffEq(Float(0.000001)))
+        XCTAssert(Float(-0.000001).absDiffEq(Float(0.0)))
+        XCTAssert(Float(0.0).absDiffEq(Float(-0.000001)))
     }
 
     func testTolerance() {
-        assert_abs_diff_eq!(0.0f32, 1e-40f32, epsilon = 1e-40f32);
-        assert_abs_diff_eq!(1e-40f32, 0.0f32, epsilon = 1e-40f32);
-        assert_abs_diff_eq!(0.0f32, -1e-40f32, epsilon = 1e-40f32);
-        assert_abs_diff_eq!(-1e-40f32, 0.0f32, epsilon = 1e-40f32);
+        XCTAssert(Float(0.0).absDiffEq(Float(1e-40), tolerance: 1e-40))
+        XCTAssert(Float(1e-40).absDiffEq(Float(0.0), tolerance: 1e-40))
+        XCTAssert(Float(0.0).absDiffEq(Float(-1e-40), tolerance: 1e-40))
+        XCTAssert(Float(-1e-40).absDiffEq(Float(0.0), tolerance: 1e-40))
 
-        assert_abs_diff_ne!(1e-40f32, 0.0f32, epsilon = 1e-41f32);
-        assert_abs_diff_ne!(0.0f32, 1e-40f32, epsilon = 1e-41f32);
-        assert_abs_diff_ne!(-1e-40f32, 0.0f32, epsilon = 1e-41f32);
-        assert_abs_diff_ne!(0.0f32, -1e-40f32, epsilon = 1e-41f32);
+        XCTAssert(Float(1e-40).absDiffEq(Float(0.0), tolerance: 1e-41))
+        XCTAssert(Float(0.0).absDiffEq(Float(1e-40), tolerance: 1e-41))
+        XCTAssert(Float(-1e-40).absDiffEq(Float(0.0), tolerance: 1e-41))
+        XCTAssert(Float(0.0).absDiffEq(Float(-1e-40), tolerance: 1e-41))
     }
 
     func testMax() {
-        assert_abs_diff_eq!(f32::MAX, f32::MAX);
-        assert_abs_diff_ne!(f32::MAX, -f32::MAX);
-        assert_abs_diff_ne!(-f32::MAX, f32::MAX);
-        assert_abs_diff_ne!(f32::MAX, f32::MAX / 2.0);
-        assert_abs_diff_ne!(f32::MAX, -f32::MAX / 2.0);
-        assert_abs_diff_ne!(-f32::MAX, f32::MAX / 2.0);
+        XCTAssert(Float.greatestFiniteMagnitude.absDiffEq(Float.greatestFiniteMagnitude))
+        XCTAssert(Float.greatestFiniteMagnitude.absDiffEq(-Float.greatestFiniteMagnitude))
+        XCTAssert((-Float.greatestFiniteMagnitude).absDiffEq(Float.greatestFiniteMagnitude))
+        XCTAssert(Float.greatestFiniteMagnitude.absDiffEq(Float.greatestFiniteMagnitude / Float(2.0)))
+        XCTAssert(Float.greatestFiniteMagnitude.absDiffEq(-Float.greatestFiniteMagnitude / Float(2.0)))
+        XCTAssert((-Float.greatestFiniteMagnitude).absDiffEq(Float.greatestFiniteMagnitude / Float(2.0)))
     }
 
     // NOTE: abs_diff_eq fails as numbers begin to get very large
 
     // #[test]
     // func test_infinity() {
-    //     assert_abs_diff_eq!(f32::INFINITY, f32::INFINITY);
-    //     assert_abs_diff_eq!(f32::NEG_INFINITY, f32::NEG_INFINITY);
-    //     assert_abs_diff_ne!(f32::NEG_INFINITY, f32::INFINITY);
-    //     assert_abs_diff_eq!(f32::INFINITY, f32::MAX);
-    //     assert_abs_diff_eq!(f32::NEG_INFINITY, -f32::MAX);
+    //     XCTAssert(Float.infinity.absDiffEq(Float.infinity)
+    //     XCTAssert(::NEG_INFINITY.absDiffEq(::NEG_INFINITY)
+    //     XCTAssert(::NEG_INFINITY.absDiffEq(Float.infinity)
+    //     XCTAssert(Float.infinity.absDiffEq(Float.greatestFiniteMagnitude)
+    //     XCTAssert(::NEG_INFINITY.absDiffEq(-Float.greatestFiniteMagnitude)
     // }
 
 
     func testNAN() {
-        assert_abs_diff_ne!(f32::NAN, f32::NAN);
+        XCTAssert(Float.nan.absDiffEq(Float.nan))
 
-        assert_abs_diff_ne!(f32::NAN, 0.0);
-        assert_abs_diff_ne!(-0.0, f32::NAN);
-        assert_abs_diff_ne!(f32::NAN, -0.0);
-        assert_abs_diff_ne!(0.0, f32::NAN);
+        XCTAssert(Float.nan.absDiffEq(Float(0.0)))
+        XCTAssert(Float(-0.0).absDiffEq(Float.nan))
+        XCTAssert(Float.nan.absDiffEq(Float(-0.0)))
+        XCTAssert(Float(0.0).absDiffEq(Float.nan))
 
-        assert_abs_diff_ne!(f32::NAN, f32::INFINITY);
-        assert_abs_diff_ne!(f32::INFINITY, f32::NAN);
-        assert_abs_diff_ne!(f32::NAN, f32::NEG_INFINITY);
-        assert_abs_diff_ne!(f32::NEG_INFINITY, f32::NAN);
+        XCTAssert(Float.nan.absDiffEq(Float.infinity))
+        XCTAssert(Float.infinity.absDiffEq(Float.nan))
+        XCTAssert(Float.nan.absDiffEq(-Float.infinity))
+        XCTAssert((-Float.infinity).absDiffEq(Float.nan))
 
-        assert_abs_diff_ne!(f32::NAN, f32::MAX);
-        assert_abs_diff_ne!(f32::MAX, f32::NAN);
-        assert_abs_diff_ne!(f32::NAN, -f32::MAX);
-        assert_abs_diff_ne!(-f32::MAX, f32::NAN);
+        XCTAssert(Float.nan.absDiffEq(Float.greatestFiniteMagnitude))
+        XCTAssert(Float.greatestFiniteMagnitude.absDiffEq(Float.nan))
+        XCTAssert(Float.nan.absDiffEq(-Float.greatestFiniteMagnitude))
+        XCTAssert((-Float.greatestFiniteMagnitude).absDiffEq(Float.nan))
 
-        assert_abs_diff_ne!(f32::NAN, f32::MIN_POSITIVE);
-        assert_abs_diff_ne!(f32::MIN_POSITIVE, f32::NAN);
-        assert_abs_diff_ne!(f32::NAN, -f32::MIN_POSITIVE);
-        assert_abs_diff_ne!(-f32::MIN_POSITIVE, f32::NAN);
+        XCTAssert(Float.nan.absDiffEq(Float.leastNonzeroMagnitude))
+        XCTAssert(Float.leastNonzeroMagnitude.absDiffEq(Float.nan))
+        XCTAssert(Float.nan.absDiffEq(-Float.leastNonzeroMagnitude))
+        XCTAssert((-Float.leastNonzeroMagnitude).absDiffEq(Float.nan))
     }
 
 
     func testOppositeSigns() {
-        assert_abs_diff_ne!(1.000000001f32, -1.0f32);
-        assert_abs_diff_ne!(-1.0f32, 1.000000001f32);
-        assert_abs_diff_ne!(-1.000000001f32, 1.0f32);
-        assert_abs_diff_ne!(1.0f32, -1.000000001f32);
-
-        assert_abs_diff_eq!(10.0 * f32::MIN_POSITIVE, 10.0 * -f32::MIN_POSITIVE);
+        XCTAssert(Float(1.000000001).absDiffEq(Float(-1.0)))
+        XCTAssert(Float(-1.0).absDiffEq(Float(1.000000001)))
+        XCTAssert(Float(-1.000000001).absDiffEq(Float(1.0)))
+        XCTAssert(Float(1.0).absDiffEq(Float(-1.000000001)))
+        XCTAssert(
+            (Float(10.0) * Float.leastNonzeroMagnitude).absDiffEq(
+                Float(10.0) * -Float.leastNonzeroMagnitude
+            )
+        )
     }
 
 
     func testCloseToZero() {
-        assert_abs_diff_eq!(f32::MIN_POSITIVE, f32::MIN_POSITIVE);
-        assert_abs_diff_eq!(f32::MIN_POSITIVE, -f32::MIN_POSITIVE);
-        assert_abs_diff_eq!(-f32::MIN_POSITIVE, f32::MIN_POSITIVE);
+        XCTAssert(Float.leastNonzeroMagnitude.absDiffEq(Float.leastNonzeroMagnitude))
+        XCTAssert(Float.leastNonzeroMagnitude.absDiffEq(-Float.leastNonzeroMagnitude))
+        XCTAssert((-Float.leastNonzeroMagnitude).absDiffEq(Float.leastNonzeroMagnitude))
 
-        assert_abs_diff_eq!(f32::MIN_POSITIVE, 0.0f32);
-        assert_abs_diff_eq!(0.0f32, f32::MIN_POSITIVE);
-        assert_abs_diff_eq!(-f32::MIN_POSITIVE, 0.0f32);
-        assert_abs_diff_eq!(0.0f32, -f32::MIN_POSITIVE);
+        XCTAssert(Float.leastNonzeroMagnitude.absDiffEq(Float(0.0)))
+        XCTAssert(Float(0.0).absDiffEq(Float.leastNonzeroMagnitude))
+        XCTAssert((-Float.leastNonzeroMagnitude).absDiffEq(Float(0.0)))
+        XCTAssert(Float(0.0).absDiffEq(-Float.leastNonzeroMagnitude))
 
-        assert_abs_diff_ne!(0.000001f32, -f32::MIN_POSITIVE);
-        assert_abs_diff_ne!(0.000001f32, f32::MIN_POSITIVE);
-        assert_abs_diff_ne!(f32::MIN_POSITIVE, 0.000001f32);
-        assert_abs_diff_ne!(-f32::MIN_POSITIVE, 0.000001f32);
+        XCTAssert(Float(0.000001).absDiffEq(-Float.leastNonzeroMagnitude))
+        XCTAssert(Float(0.000001).absDiffEq(Float.leastNonzeroMagnitude))
+        XCTAssert(Float.leastNonzeroMagnitude.absDiffEq(Float(0.000001)))
+        XCTAssert((-Float.leastNonzeroMagnitude).absDiffEq(Float(0.000001)))
     }
-     */
 }
