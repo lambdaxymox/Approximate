@@ -1,16 +1,14 @@
 public protocol RelativeEq: AbsDiffEq {
     static var defaultMaxRelative: Self.Tolerance { get }
 
-    static func relativeEq(
-        _ lhs: Self,
-        _ rhs: Self,
+    func relativeEq(
+        _ other: Self,
         tolerance: Self.Tolerance,
         maxRelative: Self.Tolerance
     ) -> Bool
 
-    static func relativeNe(
-        _ lhs: Self,
-        _ rhs: Self,
+    func relativeNe(
+        _ other: Self,
         tolerance: Self.Tolerance,
         maxRelative: Self.Tolerance
     ) -> Bool
@@ -32,51 +30,49 @@ extension Float: RelativeEq {
     /// - Returns: A boolean indicating whether or not floating point numbers
     /// are relatively equal with respect to a `maxRelative` multiple of the tolerance
     /// `tolerance`.
-    public static func relativeEq(
-        _ lhs: Float,
-        _ rhs: Float,
+    public func relativeEq(
+        _ other: Float,
         tolerance: Float = defaultTolerance,
         maxRelative: Float = defaultMaxRelative
     ) -> Bool
     {
-        // If `lhs` and `rhs` are finite and bitwise identical, They are relatively
-        // equal. If `lhs` and `rhs` are infinite and bitwise identical, they are
+        // If `self` and `other` are finite and bitwise identical, They are relatively
+        // equal. If `self` and `other` are infinite and bitwise identical, they are
         // the same kind of infinity, and therefore also equal.
-        if lhs == rhs {
+        if self == other {
             return true
         }
 
-        // If `lhs` and `rhs` are finite, this clause does not apply. If one
-        // of `lhs` and `rhs` is finite, and the other one is infinite, they
+        // If `self` and `other` are finite, this clause does not apply. If one
+        // of `self` and `other` is finite, and the other one is infinite, they
         // are not equal.
-        if lhs.isInfinite || rhs.isInfinite {
+        if self.isInfinite || other.isInfinite {
             return false
         }
         
-        // Now check whether `lhs` and `rhs` are really close together.
-        let absDiff = abs(lhs - rhs)
+        // Now check whether `self` and `other` are really close together.
+        let absDiff = abs(self - other)
         if absDiff <= tolerance {
             return true
         }
 
         // Finally, if the other cases have failed, we check their relative
-        // absolute difference against the largest absolute value of `rhs` and
-        // `lhs`.
-        let absLhs = abs(lhs)
-        let absRhs = abs(rhs)
-        let largest = absRhs > absLhs ? absRhs : absLhs
+        // absolute difference against the largest absolute value of `other` and
+        // `self`.
+        let absself = abs(self)
+        let absother = abs(other)
+        let largest = absother > absself ? absother : absself
 
         return absDiff <= largest * maxRelative
     }
 
-    public static func relativeNe(
-        _ lhs: Float,
-        _ rhs: Float,
+    public func relativeNe(
+        _ other: Float,
         tolerance: Float = defaultTolerance,
         maxRelative: Float = defaultMaxRelative
     ) -> Bool
     {
-        !relativeEq(lhs, rhs, tolerance: tolerance, maxRelative: maxRelative)
+        !self.relativeEq(other, tolerance: tolerance, maxRelative: maxRelative)
     }
 }
 
@@ -96,51 +92,49 @@ extension Double: RelativeEq {
     /// - Returns: A boolean indicating whether or not floating point numbers
     /// are relatively equal with respect to a `maxRelative` multiple of the tolerance
     /// `tolerance`.
-    public static func relativeEq(
-        _ lhs: Double,
-        _ rhs: Double,
+    public func relativeEq(
+        _ other: Double,
         tolerance: Double = defaultTolerance,
         maxRelative: Double = defaultMaxRelative
     ) -> Bool
     {
-        // If `lhs` and `rhs` are finite and bitwise identical, They are relatively
-        // equal. If `lhs` and `rhs` are infinite and bitwise identical, they are
+        // If `self` and `other` are finite and bitwise identical, They are relatively
+        // equal. If `self` and `other` are infinite and bitwise identical, they are
         // the same kind of infinity, and therefore also equal.
-        if lhs == rhs {
+        if self == other {
             return true
         }
 
-        // If `lhs` and `rhs` are finite, this clause does not apply. If one
-        // of `lhs` and `rhs` is finite, and the other one is infinite, they
+        // If `self` and `other` are finite, this clause does not apply. If one
+        // of `self` and `other` is finite, and the other one is infinite, they
         // are not equal.
-        if lhs.isInfinite || rhs.isInfinite {
+        if self.isInfinite || other.isInfinite {
             return false
         }
         
-        // Now check whether `lhs` and `rhs` are really close together.
-        let absDiff = abs(lhs - rhs)
+        // Now check whether `self` and `other` are really close together.
+        let absDiff = abs(self - other)
         if absDiff <= tolerance {
             return true
         }
 
         // Finally, if the other cases have failed, we check their relative
-        // absolute difference against the largest absolute value of `rhs` and
-        // `lhs`.
-        let absLhs = abs(lhs)
-        let absRhs = abs(rhs)
-        let largest = absRhs > absLhs ? absRhs : absLhs
+        // absolute difference against the largest absolute value of `other` and
+        // `self`.
+        let absself = abs(self)
+        let absother = abs(other)
+        let largest = absother > absself ? absother : absself
 
         return absDiff <= largest * maxRelative
     }
 
-    public static func relativeNe(
-        _ lhs: Double,
-        _ rhs: Double,
+    public func relativeNe(
+        _ other: Double,
         tolerance: Double = defaultTolerance,
         maxRelative: Double = defaultMaxRelative
     ) -> Bool
     {
-        !relativeEq(lhs, rhs, tolerance: tolerance, maxRelative: maxRelative)
+        !self.relativeEq(other, tolerance: tolerance, maxRelative: maxRelative)
     }
 }
 
@@ -154,31 +148,24 @@ where
         }
     }
 
-    public static func relativeEq(
-        _ lhs: Array<Element>,
-        _ rhs: Array<Element>,
+    public func relativeEq(
+        _ other: Array<Element>,
         tolerance: Element.Tolerance = defaultTolerance,
         maxRelative: Element.Tolerance = defaultMaxRelative
     ) -> Bool
     {
-        lhs.count == rhs.count && zip(lhs, rhs).allSatisfy({ (lhsElem, rhsElem) in
-            Element.relativeEq(
-                lhsElem,
-                rhsElem,
-                tolerance: tolerance,
-                maxRelative: maxRelative
-            )
+        self.count == other.count && zip(self, other).allSatisfy({ (lhs, rhs) in
+            lhs.relativeEq(rhs, tolerance: tolerance, maxRelative: maxRelative)
         })
     }
     
-    public static func relativeNe(
-        _ lhs: Array<Element>,
-        _ rhs: Array<Element>,
+    public func relativeNe(
+        _ other: Array<Element>,
         tolerance: Element.Tolerance = defaultTolerance,
         maxRelative: Element.Tolerance = defaultMaxRelative
     ) -> Bool
     {
-        !relativeEq(lhs, rhs, tolerance: tolerance, maxRelative: maxRelative)
+        !self.relativeEq(other, tolerance: tolerance, maxRelative: maxRelative)
     }
 }
 
