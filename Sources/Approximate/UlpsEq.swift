@@ -1,17 +1,15 @@
 public protocol UlpsEq: AbsDiffEq {
     static var defaultMaxUlps: UInt32 { get }
 
-    static func ulpsEq(
-        _ lhs: Self,
-        _ rhs: Self,
+    func ulpsEq(
+        _ other: Self,
         tolerance: Self.Tolerance,
         maxUlps: UInt32
     ) -> Bool
 
 
-    static func ulpsNe(
-        _ lhs: Self,
-        _ rhs: Self,
+    func ulpsNe(
+        _ other: Self,
         tolerance: Self.Tolerance,
         maxUlps: UInt32
     ) -> Bool
@@ -29,45 +27,43 @@ extension Float: UlpsEq {
     ///
     /// - Returns: A boolean indicating whether or not floating point numbers
     /// with respect to a maximum number `maxUlps` of units in last place.
-    public static func ulpsEq(
-        _ lhs: Float,
-        _ rhs: Float,
+    public func ulpsEq(
+        _ other: Float,
         tolerance: Float = defaultTolerance,
         maxUlps: UInt32 = defaultMaxUlps
     ) -> Bool
     {
-        // First check whether the two numbers `lhs` and `rhs` are really close
+        // First check whether the two numbers `self` and `other` are really close
         // together.
-        if lhs.absDiffEq(rhs, tolerance: tolerance) {
+        if self.absDiffEq(other, tolerance: tolerance) {
             return true
         }
 
         // If they do not fall inside the absolute difference equality closeness
         // threshold, compare their signs. Sign comparison is a cheap check
         // before comparing bit patterns.
-        if lhs.sign != rhs.sign {
+        if self.sign != other.sign {
             return false
         }
 
         // Compare the two numbers by their bit patterns.
-        let bitsLhs: UInt32 = lhs.bitPattern
-        let bitsRhs: UInt32 = rhs.bitPattern
+        let bitsself: UInt32 = self.bitPattern
+        let bitsother: UInt32 = other.bitPattern
 
-        if bitsLhs <= bitsRhs {
-            return (bitsRhs - bitsLhs) <= UInt32(maxUlps)
+        if bitsself <= bitsother {
+            return (bitsother - bitsself) <= UInt32(maxUlps)
         } else {
-            return (bitsLhs - bitsRhs) <= UInt32(maxUlps)
+            return (bitsself - bitsother) <= UInt32(maxUlps)
         }
     }
     
-    public static func ulpsNe(
-        _ lhs: Float,
-        _ rhs: Float,
+    public func ulpsNe(
+        _ other: Float,
         tolerance: Float = defaultTolerance,
         maxUlps: UInt32 = defaultMaxUlps
     ) -> Bool
     {
-        !ulpsEq(lhs, rhs, tolerance: tolerance, maxUlps: maxUlps)
+        !self.ulpsEq(other, tolerance: tolerance, maxUlps: maxUlps)
     }
 }
 
@@ -85,45 +81,43 @@ extension Double: UlpsEq {
     ///
     /// - Returns: A boolean indicating whether or not floating point numbers
     /// with respect to a maximum number `maxUlps` of units in last place.
-    public static func ulpsEq(
-        _ lhs: Double,
-        _ rhs: Double,
+    public func ulpsEq(
+        _ other: Double,
         tolerance: Double = defaultTolerance,
         maxUlps: UInt32 = defaultMaxUlps
     ) -> Bool
     {
-        // First check whether the two numbers `lhs` and `rhs` are really close
+        // First check whether the two numbers `self` and `other` are really close
         // together.
-        if lhs.absDiffEq(rhs, tolerance: tolerance) {
+        if self.absDiffEq(other, tolerance: tolerance) {
             return true
         }
 
         // If they do not fall inside the absolute difference equality closeness
         // threshold, compare their signs. Sign comparison is a cheap check
         // before comparing bit patterns.
-        if lhs.sign != rhs.sign {
+        if self.sign != other.sign {
             return false
         }
 
         // Compare the two numbers by their bit patterns.
-        let bitsLhs: UInt64 = lhs.bitPattern
-        let bitsRhs: UInt64 = rhs.bitPattern
+        let bitsself: UInt64 = self.bitPattern
+        let bitsother: UInt64 = other.bitPattern
 
-        if bitsLhs <= bitsRhs {
-            return (bitsRhs - bitsLhs) <= UInt64(maxUlps)
+        if bitsself <= bitsother {
+            return (bitsother - bitsself) <= UInt64(maxUlps)
         } else {
-            return (bitsLhs - bitsRhs) <= UInt64(maxUlps)
+            return (bitsself - bitsother) <= UInt64(maxUlps)
         }
     }
     
-    public static func ulpsNe(
-        _ lhs: Double,
-        _ rhs: Double,
+    public func ulpsNe(
+        _ other: Double,
         tolerance: Double = defaultTolerance,
         maxUlps: UInt32 = defaultMaxUlps
     ) -> Bool
     {
-        !ulpsEq(lhs, rhs, tolerance: tolerance, maxUlps: maxUlps)
+        !self.ulpsEq(other, tolerance: tolerance, maxUlps: maxUlps)
     }
 }
 
@@ -138,31 +132,24 @@ where
         }
     }
     
-    public static func ulpsEq(
-        _ lhs: Self,
-        _ rhs: Self,
+    public func ulpsEq(
+        _ other: Self,
         tolerance: Self.Tolerance = defaultTolerance,
         maxUlps: UInt32 = defaultMaxUlps
     ) -> Bool
     {
-        lhs.count == rhs.count && zip(lhs, rhs).allSatisfy({ (lhsElem, rhsElem) in
-            Element.ulpsEq(
-                lhsElem,
-                rhsElem,
-                tolerance: tolerance,
-                maxUlps: maxUlps
-            )
+        self.count == other.count && zip(self, other).allSatisfy({ (lhs, rhs) in
+            lhs.ulpsEq(rhs, tolerance: tolerance, maxUlps: maxUlps)
         })
     }
 
-    public static func ulpsNe(
-        _ lhs: Self,
-        _ rhs: Self,
+    public func ulpsNe(
+        _ other: Self,
         tolerance: Self.Tolerance = defaultTolerance,
         maxUlps: UInt32 = defaultMaxUlps
     ) -> Bool
     {
-        !ulpsEq(lhs, rhs, tolerance: tolerance, maxUlps: maxUlps)
+        !self.ulpsEq(other, tolerance: tolerance, maxUlps: maxUlps)
     }
 }
 
