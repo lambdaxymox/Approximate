@@ -14,13 +14,7 @@ extension UInt8: AbsDiffEq {
     public static var defaultTolerance: UInt8 { get { 0 } }
 
     public static func absDiffEq(_ lhs: UInt8, _ rhs: UInt8, tolerance: UInt8) -> Bool {
-        let absDiff: UInt8 = {
-            if lhs > rhs {
-                return lhs - rhs
-            } else {
-                return rhs - lhs
-            }
-        }()
+        let absDiff = lhs > rhs ? (lhs - rhs) : (rhs - lhs)
         
         return absDiff <= tolerance
     }
@@ -36,13 +30,7 @@ extension UInt16: AbsDiffEq {
     public static var defaultTolerance: UInt16 { get { 0 } }
 
     public static func absDiffEq(_ lhs: UInt16, _ rhs: UInt16, tolerance: UInt16) -> Bool {
-        let absDiff: UInt16 = {
-            if lhs > rhs {
-                return lhs - rhs
-            } else {
-                return rhs - lhs
-            }
-        }()
+        let absDiff = lhs > rhs ? (lhs - rhs) : (rhs - lhs)
         
         return absDiff <= tolerance
     }
@@ -58,13 +46,7 @@ extension UInt32: AbsDiffEq {
     public static var defaultTolerance: UInt32 { get { 0 } }
 
     public static func absDiffEq(_ lhs: UInt32, _ rhs: UInt32, tolerance: UInt32) -> Bool {
-        let absDiff: UInt32 = {
-            if lhs > rhs {
-                return lhs - rhs
-            } else {
-                return rhs - lhs
-            }
-        }()
+        let absDiff = lhs > rhs ? (lhs - rhs) : (rhs - lhs)
         
         return absDiff <= tolerance
     }
@@ -80,13 +62,7 @@ extension UInt64: AbsDiffEq {
     public static var defaultTolerance: UInt64 { get { 0 } }
 
     public static func absDiffEq(_ lhs: UInt64, _ rhs: UInt64, tolerance: UInt64) -> Bool {
-        let absDiff: UInt64 = {
-            if lhs > rhs {
-                return lhs - rhs
-            } else {
-                return rhs - lhs
-            }
-        }()
+        let absDiff = lhs > rhs ? (lhs - rhs) : (rhs - lhs)
         
         return absDiff <= tolerance
     }
@@ -102,13 +78,7 @@ extension UInt: AbsDiffEq {
     public static var defaultTolerance: UInt { get { 0 } }
 
     public static func absDiffEq(_ lhs: UInt, _ rhs: UInt, tolerance: UInt) -> Bool {
-        let absDiff: UInt = {
-            if lhs > rhs {
-                return lhs - rhs
-            } else {
-                return rhs - lhs
-            }
-        }()
+        let absDiff = lhs > rhs ? (lhs - rhs) : (rhs - lhs)
         
         return absDiff <= tolerance
     }
