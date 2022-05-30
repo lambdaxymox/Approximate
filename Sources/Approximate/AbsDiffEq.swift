@@ -3,9 +3,9 @@ public protocol AbsDiffEq: Equatable {
 
     static var defaultTolerance: Self.Tolerance { get }
 
-    static func absDiffEq(_ lhs: Self, _ rhs: Self, tolerance: Self.Tolerance) -> Bool
+    func absDiffEq(_ other: Self, tolerance: Self.Tolerance) -> Bool
 
-    static func absDiffNe(_ lhs: Self, _ rhs: Self, tolerance: Self.Tolerance) -> Bool
+    func absDiffNe(_ other: Self, tolerance: Self.Tolerance) -> Bool
 }
 
 extension UInt8: AbsDiffEq {
@@ -13,24 +13,22 @@ extension UInt8: AbsDiffEq {
     
     public static var defaultTolerance: UInt8 { get { 0 } }
 
-    public static func absDiffEq(
-        _ lhs: UInt8,
-        _ rhs: UInt8,
+    public func absDiffEq(
+        _ other: UInt8,
         tolerance: UInt8 = defaultTolerance
     ) -> Bool
     {
-        let absDiff = lhs > rhs ? (lhs - rhs) : (rhs - lhs)
+        let absDiff = self > other ? (self - other) : (other - self)
         
         return absDiff <= tolerance
     }
     
-    public static func absDiffNe(
-        _ lhs: UInt8,
-        _ rhs: UInt8,
+    public func absDiffNe(
+        _ other: UInt8,
         tolerance: UInt8 = defaultTolerance
     ) -> Bool
     {
-        !absDiffEq(lhs, rhs, tolerance: tolerance)
+        !self.absDiffEq(other, tolerance: tolerance)
     }
 }
 
@@ -39,24 +37,22 @@ extension UInt16: AbsDiffEq {
     
     public static var defaultTolerance: UInt16 { get { 0 } }
 
-    public static func absDiffEq(
-        _ lhs: UInt16,
-        _ rhs: UInt16,
+    public func absDiffEq(
+        _ other: UInt16,
         tolerance: UInt16 = defaultTolerance
     ) -> Bool
     {
-        let absDiff = lhs > rhs ? (lhs - rhs) : (rhs - lhs)
+        let absDiff = self > other ? (self - other) : (other - self)
         
         return absDiff <= tolerance
     }
     
-    public static func absDiffNe(
-        _ lhs: UInt16,
-        _ rhs: UInt16,
+    public func absDiffNe(
+        _ other: UInt16,
         tolerance: UInt16 = defaultTolerance
     ) -> Bool
     {
-        !absDiffEq(lhs, rhs, tolerance: tolerance)
+        !self.absDiffEq(other, tolerance: tolerance)
     }
 }
 
@@ -65,24 +61,22 @@ extension UInt32: AbsDiffEq {
     
     public static var defaultTolerance: UInt32 { get { 0 } }
 
-    public static func absDiffEq(
-        _ lhs: UInt32,
-        _ rhs: UInt32,
+    public func absDiffEq(
+        _ other: UInt32,
         tolerance: UInt32 = defaultTolerance
     ) -> Bool
     {
-        let absDiff = lhs > rhs ? (lhs - rhs) : (rhs - lhs)
+        let absDiff = self > other ? (self - other) : (other - self)
         
         return absDiff <= tolerance
     }
     
-    public static func absDiffNe(
-        _ lhs: UInt32,
-        _ rhs: UInt32,
+    public func absDiffNe(
+        _ other: UInt32,
         tolerance: UInt32 = defaultTolerance
     ) -> Bool
     {
-        !absDiffEq(lhs, rhs, tolerance: tolerance)
+        !self.absDiffEq(other, tolerance: tolerance)
     }
 }
 
@@ -91,24 +85,22 @@ extension UInt64: AbsDiffEq {
     
     public static var defaultTolerance: UInt64 { get { 0 } }
 
-    public static func absDiffEq(
-        _ lhs: UInt64,
-        _ rhs: UInt64,
+    public func absDiffEq(
+        _ other: UInt64,
         tolerance: UInt64 = defaultTolerance
     ) -> Bool
     {
-        let absDiff = lhs > rhs ? (lhs - rhs) : (rhs - lhs)
+        let absDiff = self > other ? (self - other) : (other - self)
         
         return absDiff <= tolerance
     }
     
-    public static func absDiffNe(
-        _ lhs: UInt64,
-        _ rhs: UInt64,
+    public func absDiffNe(
+        _ other: UInt64,
         tolerance: UInt64 = defaultTolerance
     ) -> Bool
     {
-        !absDiffEq(lhs, rhs, tolerance: tolerance)
+        !self.absDiffEq(other, tolerance: tolerance)
     }
 }
 
@@ -117,24 +109,22 @@ extension UInt: AbsDiffEq {
     
     public static var defaultTolerance: UInt { get { 0 } }
 
-    public static func absDiffEq(
-        _ lhs: UInt,
-        _ rhs: UInt,
+    public func absDiffEq(
+        _ other: UInt,
         tolerance: UInt = defaultTolerance
     ) -> Bool
     {
-        let absDiff = lhs > rhs ? (lhs - rhs) : (rhs - lhs)
+        let absDiff = self > other ? (self - other) : (other - self)
         
         return absDiff <= tolerance
     }
     
-    public static func absDiffNe(
-        _ lhs: UInt,
-        _ rhs: UInt,
+    public func absDiffNe(
+        _ other: UInt,
         tolerance: UInt = defaultTolerance
     ) -> Bool
     {
-        !absDiffEq(lhs, rhs, tolerance: tolerance)
+        !self.absDiffEq(other, tolerance: tolerance)
     }
 }
 
@@ -143,22 +133,20 @@ extension Int8: AbsDiffEq {
     
     public static var defaultTolerance: Int8 { get { 0 } }
 
-    public static func absDiffEq(
-        _ lhs: Int8,
-        _ rhs: Int8,
+    public func absDiffEq(
+        _ other: Int8,
         tolerance: Int8 = defaultTolerance
     ) -> Bool
     {
-        abs(lhs - rhs) <= tolerance
+        abs(self - other) <= tolerance
     }
     
-    public static func absDiffNe(
-        _ lhs: Int8,
-        _ rhs: Int8,
+    public func absDiffNe(
+        _ other: Int8,
         tolerance: Int8 = defaultTolerance
     ) -> Bool
     {
-        !absDiffEq(lhs, rhs, tolerance: tolerance)
+        !self.absDiffEq(other, tolerance: tolerance)
     }
 }
 
@@ -167,22 +155,20 @@ extension Int16: AbsDiffEq {
     
     public static var defaultTolerance: Int16 { get { 0 } }
 
-    public static func absDiffEq(
-        _ lhs: Int16,
-        _ rhs: Int16,
+    public func absDiffEq(
+        _ other: Int16,
         tolerance: Int16 = defaultTolerance
     ) -> Bool
     {
-        abs(lhs - rhs) <= tolerance
+        abs(self - other) <= tolerance
     }
     
-    public static func absDiffNe(
-        _ lhs: Int16,
-        _ rhs: Int16,
+    public func absDiffNe(
+        _ other: Int16,
         tolerance: Int16 = defaultTolerance
     ) -> Bool
     {
-        !absDiffEq(lhs, rhs, tolerance: tolerance)
+        !self.absDiffEq(other, tolerance: tolerance)
     }
 }
 
@@ -191,22 +177,20 @@ extension Int32: AbsDiffEq {
     
     public static var defaultTolerance: Int32 { get { 0 } }
 
-    public static func absDiffEq(
-        _ lhs: Int32,
-        _ rhs: Int32,
+    public func absDiffEq(
+        _ other: Int32,
         tolerance: Int32 = defaultTolerance
     ) -> Bool
     {
-        abs(lhs - rhs) <= tolerance
+        abs(self - other) <= tolerance
     }
     
-    public static func absDiffNe(
-        _ lhs: Int32,
-        _ rhs: Int32,
+    public func absDiffNe(
+        _ other: Int32,
         tolerance: Int32 = defaultTolerance
     ) -> Bool
     {
-        !absDiffEq(lhs, rhs, tolerance: tolerance)
+        !self.absDiffEq(other, tolerance: tolerance)
     }
 }
 
@@ -215,22 +199,20 @@ extension Int64: AbsDiffEq {
     
     public static var defaultTolerance: Int64 { get { 0 } }
 
-    public static func absDiffEq(
-        _ lhs: Int64,
-        _ rhs: Int64,
+    public func absDiffEq(
+        _ other: Int64,
         tolerance: Int64 = defaultTolerance
     ) -> Bool
     {
-        abs(lhs - rhs) <= tolerance
+        abs(self - other) <= tolerance
     }
     
-    public static func absDiffNe(
-        _ lhs: Int64,
-        _ rhs: Int64,
+    public func absDiffNe(
+        _ other: Int64,
         tolerance: Int64 = defaultTolerance
     ) -> Bool
     {
-        !absDiffEq(lhs, rhs, tolerance: tolerance)
+        !self.absDiffEq(other, tolerance: tolerance)
     }
 }
 
@@ -239,22 +221,20 @@ extension Int: AbsDiffEq {
     
     public static var defaultTolerance: Int { get { 0 } }
 
-    public static func absDiffEq(
-        _ lhs: Int,
-        _ rhs: Int,
+    public func absDiffEq(
+        _ other: Int,
         tolerance: Int  = defaultTolerance
     ) -> Bool
     {
-        abs(lhs - rhs) <= tolerance
+        abs(self - other) <= tolerance
     }
     
-    public static func absDiffNe(
-        _ lhs: Int,
-        _ rhs: Int,
+    public func absDiffNe(
+        _ other: Int,
         tolerance: Int = defaultTolerance
     ) -> Bool
     {
-        !absDiffEq(lhs, rhs, tolerance: tolerance)
+        !self.absDiffEq(other, tolerance: tolerance)
     }
 }
 
@@ -263,22 +243,20 @@ extension Float: AbsDiffEq {
     
     public static var defaultTolerance: Float { get { Float.ulpOfOne } }
 
-    public static func absDiffEq(
-        _ lhs: Float,
-        _ rhs: Float,
+    public func absDiffEq(
+        _ other: Float,
         tolerance: Float = defaultTolerance
     ) -> Bool
     {
-        abs(lhs - rhs) <= tolerance
+        abs(self - other) <= tolerance
     }
     
-    public static func absDiffNe(
-        _ lhs: Float,
-        _ rhs: Float,
+    public func absDiffNe(
+        _ other: Float,
         tolerance: Float = defaultTolerance
     ) -> Bool
     {
-        !absDiffEq(lhs, rhs, tolerance: tolerance)
+        !self.absDiffEq(other, tolerance: tolerance)
     }
 }
 
@@ -287,22 +265,20 @@ extension Double: AbsDiffEq {
     
     public static var defaultTolerance: Double { get { Double.ulpOfOne } }
 
-    public static func absDiffEq(
-        _ lhs: Double,
-        _ rhs: Double,
+    public func absDiffEq(
+        _ other: Double,
         tolerance: Double = defaultTolerance
     ) -> Bool
     {
-        abs(lhs - rhs) <= tolerance
+        abs(self - other) <= tolerance
     }
     
-    public static func absDiffNe(
-        _ lhs: Double,
-        _ rhs: Double,
+    public func absDiffNe(
+        _ other: Double,
         tolerance: Double = defaultTolerance
     ) -> Bool
     {
-        !absDiffEq(lhs, rhs, tolerance: tolerance)
+        !self.absDiffEq(other, tolerance: tolerance)
     }
 }
 
@@ -318,24 +294,22 @@ where
         }
     }
 
-    public static func absDiffEq(
-        _ lhs: Array<Element>,
-        _ rhs: Array<Element>,
+    public func absDiffEq(
+        _ other: Array<Element>,
         tolerance: Element.Tolerance = defaultTolerance
     ) -> Bool
     {
-        lhs.count == rhs.count && zip(lhs, rhs).allSatisfy({ (lhsElem, rhsElem) in
-            Element.absDiffEq(lhsElem, rhsElem, tolerance: tolerance)
+        self.count == other.count && zip(self, other).allSatisfy({ (lhs, rhs) in
+            lhs.absDiffEq(rhs, tolerance: tolerance)
         })
     }
     
-    public static func absDiffNe(
-        _ lhs: Array<Element>,
-        _ rhs: Array<Element>,
+    public func absDiffNe(
+        _ other: Array<Element>,
         tolerance: Element.Tolerance = defaultTolerance
     ) -> Bool
     {
-        !absDiffEq(lhs, rhs, tolerance: tolerance)
+        !self.absDiffEq(other, tolerance: tolerance)
     }
 }
 

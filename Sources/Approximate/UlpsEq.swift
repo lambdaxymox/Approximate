@@ -18,9 +18,7 @@ public protocol UlpsEq: AbsDiffEq {
 }
 
 extension Float: UlpsEq {
-    public static var defaultMaxUlps: UInt32 {
-        get { 4 }
-    }
+    public static var defaultMaxUlps: UInt32 { get { 4 } }
 
     /// Compare two floating point numbers for units in last place (ULPS)
     /// equality.
@@ -40,7 +38,7 @@ extension Float: UlpsEq {
     {
         // First check whether the two numbers `lhs` and `rhs` are really close
         // together.
-        if absDiffEq(lhs, rhs, tolerance: tolerance) {
+        if lhs.absDiffEq(rhs, tolerance: tolerance) {
             return true
         }
 
@@ -96,7 +94,7 @@ extension Double: UlpsEq {
     {
         // First check whether the two numbers `lhs` and `rhs` are really close
         // together.
-        if absDiffEq(lhs, rhs, tolerance: tolerance) {
+        if lhs.absDiffEq(rhs, tolerance: tolerance) {
             return true
         }
 
