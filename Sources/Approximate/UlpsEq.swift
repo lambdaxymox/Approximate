@@ -34,8 +34,8 @@ extension Float: UlpsEq {
     public static func ulpsEq(
         _ lhs: Float,
         _ rhs: Float,
-        tolerance: Float,
-        maxUlps: UInt32
+        tolerance: Float = defaultTolerance,
+        maxUlps: UInt32 = defaultMaxUlps
     ) -> Bool
     {
         // First check whether the two numbers `lhs` and `rhs` are really close
@@ -65,11 +65,11 @@ extension Float: UlpsEq {
     public static func ulpsNe(
         _ lhs: Float,
         _ rhs: Float,
-        tolerance: Float,
-        maxUlps: UInt32
+        tolerance: Float = defaultTolerance,
+        maxUlps: UInt32 = defaultMaxUlps
     ) -> Bool
     {
-        !(ulpsEq(lhs, rhs, tolerance: tolerance, maxUlps: maxUlps))
+        !ulpsEq(lhs, rhs, tolerance: tolerance, maxUlps: maxUlps)
     }
 }
 
@@ -90,8 +90,8 @@ extension Double: UlpsEq {
     public static func ulpsEq(
         _ lhs: Double,
         _ rhs: Double,
-        tolerance: Double,
-        maxUlps: UInt32
+        tolerance: Double = defaultTolerance,
+        maxUlps: UInt32 = defaultMaxUlps
     ) -> Bool
     {
         // First check whether the two numbers `lhs` and `rhs` are really close
@@ -121,11 +121,11 @@ extension Double: UlpsEq {
     public static func ulpsNe(
         _ lhs: Double,
         _ rhs: Double,
-        tolerance: Double,
-        maxUlps: UInt32
+        tolerance: Double = defaultTolerance,
+        maxUlps: UInt32 = defaultMaxUlps
     ) -> Bool
     {
-        !(ulpsEq(lhs, rhs, tolerance: tolerance, maxUlps: maxUlps))
+        !ulpsEq(lhs, rhs, tolerance: tolerance, maxUlps: maxUlps)
     }
 }
 
@@ -143,8 +143,8 @@ where
     public static func ulpsEq(
         _ lhs: Self,
         _ rhs: Self,
-        tolerance: Self.Tolerance,
-        maxUlps: UInt32
+        tolerance: Self.Tolerance = defaultTolerance,
+        maxUlps: UInt32 = defaultMaxUlps
     ) -> Bool
     {
         lhs.count == rhs.count && zip(lhs, rhs).allSatisfy({ (lhsElem, rhsElem) in
@@ -160,8 +160,8 @@ where
     public static func ulpsNe(
         _ lhs: Self,
         _ rhs: Self,
-        tolerance: Self.Tolerance,
-        maxUlps: UInt32
+        tolerance: Self.Tolerance = defaultTolerance,
+        maxUlps: UInt32 = defaultMaxUlps
     ) -> Bool
     {
         !ulpsEq(lhs, rhs, tolerance: tolerance, maxUlps: maxUlps)
