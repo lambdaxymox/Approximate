@@ -32,9 +32,7 @@ extension Float: RelativeEq {
     /// `tolerance`.
     public func relativeEq(
         _ other: Float,
-        tolerance: Float = defaultTolerance,
-        maxRelative: Float = defaultMaxRelative
-    ) -> Bool
+        tolerance: Float = defaultTolerance, maxRelative: Float = defaultMaxRelative) -> Bool
     {
         // If `self` and `other` are finite and bitwise identical, They are relatively
         // equal. If `self` and `other` are infinite and bitwise identical, they are
@@ -68,9 +66,7 @@ extension Float: RelativeEq {
 
     public func relativeNe(
         _ other: Float,
-        tolerance: Float = defaultTolerance,
-        maxRelative: Float = defaultMaxRelative
-    ) -> Bool
+        tolerance: Float = defaultTolerance, maxRelative: Float = defaultMaxRelative) -> Bool
     {
         !self.relativeEq(other, tolerance: tolerance, maxRelative: maxRelative)
     }
@@ -94,9 +90,7 @@ extension Double: RelativeEq {
     /// `tolerance`.
     public func relativeEq(
         _ other: Double,
-        tolerance: Double = defaultTolerance,
-        maxRelative: Double = defaultMaxRelative
-    ) -> Bool
+        tolerance: Double = defaultTolerance, maxRelative: Double = defaultMaxRelative) -> Bool
     {
         // If `self` and `other` are finite and bitwise identical, They are relatively
         // equal. If `self` and `other` are infinite and bitwise identical, they are
@@ -130,9 +124,7 @@ extension Double: RelativeEq {
 
     public func relativeNe(
         _ other: Double,
-        tolerance: Double = defaultTolerance,
-        maxRelative: Double = defaultMaxRelative
-    ) -> Bool
+        tolerance: Double = defaultTolerance, maxRelative: Double = defaultMaxRelative) -> Bool
     {
         !self.relativeEq(other, tolerance: tolerance, maxRelative: maxRelative)
     }
@@ -151,8 +143,7 @@ where
     public func relativeEq(
         _ other: Array<Element>,
         tolerance: Element.Tolerance = defaultTolerance,
-        maxRelative: Element.Tolerance = defaultMaxRelative
-    ) -> Bool
+        maxRelative: Element.Tolerance = defaultMaxRelative) -> Bool
     {
         self.count == other.count && zip(self, other).allSatisfy({ (lhs, rhs) in
             lhs.relativeEq(rhs, tolerance: tolerance, maxRelative: maxRelative)
@@ -162,8 +153,7 @@ where
     public func relativeNe(
         _ other: Array<Element>,
         tolerance: Element.Tolerance = defaultTolerance,
-        maxRelative: Element.Tolerance = defaultMaxRelative
-    ) -> Bool
+        maxRelative: Element.Tolerance = defaultMaxRelative) -> Bool
     {
         !self.relativeEq(other, tolerance: tolerance, maxRelative: maxRelative)
     }

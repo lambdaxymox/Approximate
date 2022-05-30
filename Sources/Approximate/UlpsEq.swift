@@ -29,9 +29,7 @@ extension Float: UlpsEq {
     /// with respect to a maximum number `maxUlps` of units in last place.
     public func ulpsEq(
         _ other: Float,
-        tolerance: Float = defaultTolerance,
-        maxUlps: UInt32 = defaultMaxUlps
-    ) -> Bool
+        tolerance: Float = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
         // First check whether the two numbers `self` and `other` are really close
         // together.
@@ -59,9 +57,7 @@ extension Float: UlpsEq {
     
     public func ulpsNe(
         _ other: Float,
-        tolerance: Float = defaultTolerance,
-        maxUlps: UInt32 = defaultMaxUlps
-    ) -> Bool
+        tolerance: Float = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
         !self.ulpsEq(other, tolerance: tolerance, maxUlps: maxUlps)
     }
@@ -83,9 +79,7 @@ extension Double: UlpsEq {
     /// with respect to a maximum number `maxUlps` of units in last place.
     public func ulpsEq(
         _ other: Double,
-        tolerance: Double = defaultTolerance,
-        maxUlps: UInt32 = defaultMaxUlps
-    ) -> Bool
+        tolerance: Double = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
         // First check whether the two numbers `self` and `other` are really close
         // together.
@@ -113,9 +107,7 @@ extension Double: UlpsEq {
     
     public func ulpsNe(
         _ other: Double,
-        tolerance: Double = defaultTolerance,
-        maxUlps: UInt32 = defaultMaxUlps
-    ) -> Bool
+        tolerance: Double = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
         !self.ulpsEq(other, tolerance: tolerance, maxUlps: maxUlps)
     }
@@ -134,9 +126,7 @@ where
     
     public func ulpsEq(
         _ other: Self,
-        tolerance: Self.Tolerance = defaultTolerance,
-        maxUlps: UInt32 = defaultMaxUlps
-    ) -> Bool
+        tolerance: Self.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
         self.count == other.count && zip(self, other).allSatisfy({ (lhs, rhs) in
             lhs.ulpsEq(rhs, tolerance: tolerance, maxUlps: maxUlps)
@@ -145,9 +135,7 @@ where
 
     public func ulpsNe(
         _ other: Self,
-        tolerance: Self.Tolerance = defaultTolerance,
-        maxUlps: UInt32 = defaultMaxUlps
-    ) -> Bool
+        tolerance: Self.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
         !self.ulpsEq(other, tolerance: tolerance, maxUlps: maxUlps)
     }
