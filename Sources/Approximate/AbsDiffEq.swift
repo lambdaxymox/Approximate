@@ -216,3 +216,30 @@ extension Double: AbsDiffEq {
     }
 }
 
+extension Array: AbsDiffEq
+where
+    Element: AbsDiffEq
+{
+    public typealias Tolerance = Element.Tolerance;
+    
+    public static var defaultTolerance: Element.Tolerance {
+        get {
+            Element.defaultTolerance
+        }
+    }
+
+    public static func absDiffEq(
+        _ lhs: Array<Element>, _ rhs: Array<Element>, tolerance: Element.Tolerance) -> Bool
+    {
+        lhs.count == rhs.count && zip(lhs, rhs).allSatisfy({ (lhsElem, rhsElem) in
+            Element.absDiffEq(lhsElem, rhsElem, tolerance: tolerance)
+        })
+    }
+    
+    public static func absDiffNe(
+        _ lhs: Array<Element>, _ rhs: Array<Element>, tolerance: Element.Tolerance) -> Bool
+    {
+        !(absDiffEq(lhs, rhs, tolerance: tolerance))
+    }
+}
+
