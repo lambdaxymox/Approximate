@@ -228,9 +228,17 @@ where
         _ other: Array<Element>,
         tolerance: Element.Tolerance = defaultTolerance) -> Bool
     {
-        self.count == other.count && zip(self, other).allSatisfy({ (lhs, rhs) in
-            lhs.absDiffEq(rhs, tolerance: tolerance)
-        })
+        if self.count != other.count {
+            return false
+        }
+        
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = true
+        for i in 0...self.count {
+            result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
+        }
+        
+        return result
     }
     
     public func absDiffNe(
@@ -259,7 +267,7 @@ where
         tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
         }
@@ -293,7 +301,7 @@ where
         tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
     {
         // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
         }
@@ -327,7 +335,7 @@ where
         tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
     {
         // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
         }
@@ -361,7 +369,7 @@ where
         tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
     {
         // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
         }
@@ -395,7 +403,7 @@ where
         tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
     {
         // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
         }
@@ -429,7 +437,7 @@ where
         tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
     {
         // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
         }
@@ -463,7 +471,7 @@ where
         tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
     {
         // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
         }

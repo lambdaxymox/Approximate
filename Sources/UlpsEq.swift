@@ -123,9 +123,17 @@ where
         _ other: Self,
         tolerance: Self.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
-        self.count == other.count && zip(self, other).allSatisfy({ (lhs, rhs) in
-            lhs.ulpsEq(rhs, tolerance: tolerance, maxUlps: maxUlps)
-        })
+        if self.count != other.count {
+            return false
+        }
+        
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = true
+        for i in 0...self.count {
+            result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
+        }
+        
+        return result
     }
 
     public func ulpsNe(
@@ -152,7 +160,7 @@ where
         tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
         }
@@ -184,7 +192,7 @@ where
         tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
         }
@@ -216,7 +224,7 @@ where
         tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
         }
@@ -248,7 +256,7 @@ where
         tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
         }
@@ -280,7 +288,7 @@ where
         tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
         }
@@ -312,7 +320,7 @@ where
         tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
         }
@@ -344,7 +352,7 @@ where
         tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
         }

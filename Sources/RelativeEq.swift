@@ -147,9 +147,17 @@ where
         tolerance: Element.Tolerance = defaultTolerance,
         maxRelative: Element.Tolerance = defaultMaxRelative) -> Bool
     {
-        self.count == other.count && zip(self, other).allSatisfy({ (lhs, rhs) in
-            lhs.relativeEq(rhs, tolerance: tolerance, maxRelative: maxRelative)
-        })
+        if self.count != other.count {
+            return false
+        }
+        
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = true
+        for i in 0...self.count {
+            result = result && self[i].relativeEq(other[i], tolerance: tolerance, maxRelative: maxRelative)
+        }
+        
+        return result
     }
     
     public func relativeNe(
@@ -178,7 +186,7 @@ where
         maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].relativeEq(other[i], tolerance: tolerance, maxRelative: maxRelative)
         }
@@ -212,7 +220,7 @@ where
         maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].relativeEq(other[i], tolerance: tolerance, maxRelative: maxRelative)
         }
@@ -246,7 +254,7 @@ where
         maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].relativeEq(other[i], tolerance: tolerance, maxRelative: maxRelative)
         }
@@ -280,7 +288,7 @@ where
         maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].relativeEq(other[i], tolerance: tolerance, maxRelative: maxRelative)
         }
@@ -314,7 +322,7 @@ where
         maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].relativeEq(other[i], tolerance: tolerance, maxRelative: maxRelative)
         }
@@ -348,7 +356,7 @@ where
         maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].relativeEq(other[i], tolerance: tolerance, maxRelative: maxRelative)
         }
@@ -382,7 +390,7 @@ where
         maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
-        var result = false
+        var result = true
         for i in 0...self.scalarCount {
             result = result && self[i].relativeEq(other[i], tolerance: tolerance, maxRelative: maxRelative)
         }
