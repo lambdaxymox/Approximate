@@ -3,11 +3,11 @@
 /// Two floating point numbers are equal relative to some error if the
 /// following condition holds.
 ///
-/// Given floating point numbers `lhs` and `rhs`, and an error `tol`, we say
-/// that `lhs` and `rhs` are approximately equal within tolerance `tol`
+/// Given floating point numbers `lhs` and `rhs`, and an error `tolerance`, we
+/// say that `lhs` and `rhs` are approximately equal within tolerance `tolerance`
 /// provided that
 /// ```
-/// abs(lhs - rhs) <= tol
+/// abs(lhs - rhs) <= tolerance
 /// ```
 ///
 /// - Returns: A boolean indicating whether or not two floating point
@@ -24,8 +24,8 @@ public func absDiffEq<T: AbsDiffEq>(
 /// Compare two floating point numbers for absolute difference inequality.
 ///
 /// Two floating point numbers are approximately inequal within tolerance
-/// `tol` provided that they are not approximately equal within tolerance
-/// `tol`.
+/// `tolerance` provided that they are not approximately equal within tolerance
+/// `tolerance`.
 ///
 /// - Returns: A boolean indicating whether or not two floating point
 /// numbers are absolute difference inequal with respect to a tolerance
