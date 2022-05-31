@@ -268,7 +268,7 @@ where
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
         var result = true
-        for i in 0...self.scalarCount {
+        for i in 0..<self.scalarCount {
             result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
         }
         
@@ -302,7 +302,7 @@ where
     {
         // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
         var result = true
-        for i in 0...self.scalarCount {
+        for i in 0..<self.scalarCount {
             result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
         }
         
@@ -336,7 +336,7 @@ where
     {
         // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
         var result = true
-        for i in 0...self.scalarCount {
+        for i in 0..<self.scalarCount {
             result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
         }
         
@@ -370,7 +370,7 @@ where
     {
         // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
         var result = true
-        for i in 0...self.scalarCount {
+        for i in 0..<self.scalarCount {
             result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
         }
         
@@ -404,7 +404,7 @@ where
     {
         // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
         var result = true
-        for i in 0...self.scalarCount {
+        for i in 0..<self.scalarCount {
             result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
         }
         
@@ -438,7 +438,7 @@ where
     {
         // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
         var result = true
-        for i in 0...self.scalarCount {
+        for i in 0..<self.scalarCount {
             result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
         }
         
@@ -472,7 +472,7 @@ where
     {
         // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
         var result = true
-        for i in 0...self.scalarCount {
+        for i in 0..<self.scalarCount {
             result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
         }
         

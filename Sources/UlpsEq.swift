@@ -161,7 +161,7 @@ where
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
         var result = true
-        for i in 0...self.scalarCount {
+        for i in 0..<self.scalarCount {
             result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
         }
         
@@ -193,7 +193,7 @@ where
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
         var result = true
-        for i in 0...self.scalarCount {
+        for i in 0..<self.scalarCount {
             result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
         }
         
@@ -225,7 +225,7 @@ where
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
         var result = true
-        for i in 0...self.scalarCount {
+        for i in 0..<self.scalarCount {
             result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
         }
         
@@ -257,7 +257,7 @@ where
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
         var result = true
-        for i in 0...self.scalarCount {
+        for i in 0..<self.scalarCount {
             result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
         }
         
@@ -289,7 +289,7 @@ where
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
         var result = true
-        for i in 0...self.scalarCount {
+        for i in 0..<self.scalarCount {
             result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
         }
         
@@ -321,7 +321,7 @@ where
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
         var result = true
-        for i in 0...self.scalarCount {
+        for i in 0..<self.scalarCount {
             result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
         }
         
@@ -353,7 +353,7 @@ where
     {
         // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
         var result = true
-        for i in 0...self.scalarCount {
+        for i in 0..<self.scalarCount {
             result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
         }
         
