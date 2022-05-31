@@ -1,13 +1,34 @@
 public protocol UlpsEq: AbsDiffEq {
+    /// The default maximum number of units in last place when one is not
+    /// specified at the time of comparison.
     static var defaultMaxUlps: UInt32 { get }
 
+    /// Compare two floating point numbers for units in last place (ULPS)
+    /// equality.
+    ///
+    /// The ulps equality comparison for floating point numbers is based on
+    /// the contents of the article [Comparing Floating Point Numbers, 2012 Edition]
+    /// (https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/)
+    ///
+    /// - Returns: A boolean indicating whether or not two are floating point
+    /// numbers are equal with respect to a maximum number `maxUlps` of units
+    /// in last place.
     func ulpsEq(
         _ other: Self,
         tolerance: Self.Tolerance,
         maxUlps: UInt32
     ) -> Bool
 
-
+    /// Compare two floating point numbers for units in last place (ULPS)
+    /// inequality.
+    ///
+    /// The ulps inequality comparison for floating point numbers is based on
+    /// the contents of the article [Comparing Floating Point Numbers, 2012 Edition]
+    /// (https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/)
+    ///
+    /// - Returns: A boolean indicating whether or not two are floating point
+    /// numbers are inequal with respect to a maximum number `maxUlps` of units
+    /// in last place.
     func ulpsNe(
         _ other: Self,
         tolerance: Self.Tolerance,
@@ -18,15 +39,6 @@ public protocol UlpsEq: AbsDiffEq {
 extension Float: UlpsEq {
     public static var defaultMaxUlps: UInt32 { get { 4 } }
 
-    /// Compare two floating point numbers for units in last place (ULPS)
-    /// equality.
-    ///
-    /// The ulps equality comparison for floating point numbers is based on
-    /// the contents of the article [Comparing Floating Point Numbers, 2012 Edition]
-    /// (https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/)
-    ///
-    /// - Returns: A boolean indicating whether or not floating point numbers
-    /// with respect to a maximum number `maxUlps` of units in last place.
     public func ulpsEq(
         _ other: Float,
         tolerance: Float = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool

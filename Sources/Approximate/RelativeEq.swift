@@ -1,12 +1,32 @@
 public protocol RelativeEq: AbsDiffEq {
+    /// The default maximum relative error multiplier when one is
+    /// not specified at the time of comparison.
     static var defaultMaxRelative: Self.Tolerance { get }
 
+    /// Compare two floating point numbers for relative equality.
+    ///
+    /// The relative equality comparison for floating point numbers is based on
+    /// the contents of the article [Comparing Floating Point Numbers, 2012 Edition]
+    /// (https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/)
+    ///
+    /// - Returns: A boolean indicating whether or not two floating point numbers
+    /// are relatively equal with respect to a `maxRelative` multiple of the
+    /// tolerance `tolerance`.
     func relativeEq(
         _ other: Self,
         tolerance: Self.Tolerance,
         maxRelative: Self.Tolerance
     ) -> Bool
 
+    /// Compare two floating point numbers for relative inequality.
+    ///
+    /// The relative inequality comparison for floating point numbers is based on
+    /// the contents of the article [Comparing Floating Point Numbers, 2012 Edition]
+    /// (https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/)
+    ///
+    /// - Returns: A boolean indicating whether or not two floating point numbers
+    /// are relatively inequal with respect to a `maxRelative` multiple of the
+    /// tolerance `tolerance`.
     func relativeNe(
         _ other: Self,
         tolerance: Self.Tolerance,
@@ -21,15 +41,6 @@ extension Float: RelativeEq {
         }
     }
 
-    /// Compare two floating point numbers for relative equality.
-    ///
-    /// The relative equality comparison for floating point numbers is based on
-    /// the contents of the article [Comparing Floating Point Numbers, 2012 Edition]
-    /// (https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/)
-    ///
-    /// - Returns: A boolean indicating whether or not floating point numbers
-    /// are relatively equal with respect to a `maxRelative` multiple of the tolerance
-    /// `tolerance`.
     public func relativeEq(
         _ other: Float,
         tolerance: Float = defaultTolerance, maxRelative: Float = defaultMaxRelative) -> Bool
@@ -79,15 +90,6 @@ extension Double: RelativeEq {
         }
     }
 
-    /// Compare two floating point numbers for relative equality.
-    ///
-    /// The relative equality comparison for floating point numbers is based on
-    /// the contents of the article [Comparing Floating Point Numbers, 2012 Edition]
-    /// (https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/)
-    ///
-    /// - Returns: A boolean indicating whether or not floating point numbers
-    /// are relatively equal with respect to a `maxRelative` multiple of the tolerance
-    /// `tolerance`.
     public func relativeEq(
         _ other: Double,
         tolerance: Double = defaultTolerance, maxRelative: Double = defaultMaxRelative) -> Bool

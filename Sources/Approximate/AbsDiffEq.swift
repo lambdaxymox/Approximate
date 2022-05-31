@@ -1,10 +1,36 @@
 public protocol AbsDiffEq: Equatable {
     associatedtype Tolerance;
 
+    /// The default tolerance for absolute difference comparisons when a
+    /// tolerance is not specified at the time of comparison.
     static var defaultTolerance: Self.Tolerance { get }
 
+    /// Compare two floating point numbers for absolute difference equality.
+    ///
+    /// Two floating point numbers are equal relative to some error if the
+    /// following condition holds.
+    ///
+    /// Given floating point numbers `lhs` and `rhs`, and an error `tol`, we say
+    /// that `lhs` and `rhs` are approximately equal within tolerance `tol`
+    /// provided that
+    /// ```
+    /// abs(lhs - rhs) <= tol
+    /// ```
+    ///
+    /// - Returns: A boolean indicating whether or not two floating point
+    /// numbers are absolute difference equal with respect to a tolerance
+    /// `tolerance`.
     func absDiffEq(_ other: Self, tolerance: Self.Tolerance) -> Bool
 
+    /// Compare two floating point numbers for absolute difference inequality.
+    ///
+    /// Two floating point numbers are approximately inequal within tolerance
+    /// `tol` provided that they are not approximately equal within tolerance
+    /// `tol`.
+    ///
+    /// - Returns: A boolean indicating whether or not two floating point
+    /// numbers are absolute difference inequal with respect to a tolerance
+    /// `tolerance`.
     func absDiffNe(_ other: Self, tolerance: Self.Tolerance) -> Bool
 }
 
