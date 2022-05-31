@@ -86,18 +86,6 @@ final class AbsDiffEqFloatTests: XCTestCase {
         XCTAssert((-Float.greatestFiniteMagnitude).absDiffNe(Float.greatestFiniteMagnitude / Float(2.0)))
     }
 
-    // NOTE: abs_diff_eq fails as numbers begin to get very large
-
-    // #[test]
-    // func test_infinity() {
-    //     XCTAssert(Float.infinity.absDiffEq(Float.infinity)
-    //     XCTAssert(::NEG_INFINITY.absDiffEq(::NEG_INFINITY)
-    //     XCTAssert(::NEG_INFINITY.absDiffEq(Float.infinity)
-    //     XCTAssert(Float.infinity.absDiffEq(Float.greatestFiniteMagnitude)
-    //     XCTAssert(::NEG_INFINITY.absDiffEq(-Float.greatestFiniteMagnitude)
-    // }
-
-
     func testNAN() {
         XCTAssert(Float.nan.absDiffNe(Float.nan))
 
@@ -153,3 +141,137 @@ final class AbsDiffEqFloatTests: XCTestCase {
     }
 }
 
+
+final class AbsDiffEqDoubleTests: XCTestCase {
+    func testBasicEq() {
+        XCTAssert(Double(1.0).absDiffEq(Double(1.0)))
+        XCTAssert(Double(1.0).absDiffNe(Double(2.0)))
+    }
+
+    func testBasicNe() {
+        XCTAssert(Double(1.0).absDiffNe(Double(2.0)))
+    }
+
+    func testBig() {
+        XCTAssert(Double(10000000000000000.0).absDiffEq(Double(10000000000000001.0)))
+        XCTAssert(Double(10000000000000001.0).absDiffEq(Double(10000000000000000.0)))
+        XCTAssert(Double(1000000000000000.0).absDiffNe(Double(1000000000000001.0)))
+        XCTAssert(Double(1000000000000001.0).absDiffNe(Double(1000000000000000.0)))
+    }
+
+    func testBigNeg() {
+        XCTAssert(Double(-10000000000000000.0).absDiffEq(Double(-10000000000000001.0)))
+        XCTAssert(Double(-10000000000000001.0).absDiffEq(Double(-10000000000000000.0)))
+        XCTAssert(Double(-1000000000000000.0).absDiffNe(Double(-1000000000000001.0)))
+        XCTAssert(Double(-1000000000000001.0).absDiffNe(Double(-1000000000000000.0)))
+    }
+
+    func testMid() {
+        XCTAssert(Double(1.0000000000000001).absDiffEq(Double(1.0000000000000002)))
+        XCTAssert(Double(1.0000000000000002).absDiffEq(Double(1.0000000000000001)))
+        XCTAssert(Double(1.000000000000001).absDiffNe(Double(1.000000000000002)))
+        XCTAssert(Double(1.000000000000002).absDiffNe(Double(1.000000000000001)))
+    }
+
+    func testMidNeg() {
+        XCTAssert(Double(-1.0000000000000001).absDiffEq(Double(-1.0000000000000002)))
+        XCTAssert(Double(-1.0000000000000002).absDiffEq(Double(-1.0000000000000001)))
+        XCTAssert(Double(-1.000000000000001).absDiffNe(Double(-1.000000000000002)))
+        XCTAssert(Double(-1.000000000000002).absDiffNe(Double(-1.000000000000001)))
+    }
+
+    func testSmall() {
+        XCTAssert(Double(0.0000000100000001).absDiffEq(Double(0.0000000100000002)))
+        XCTAssert(Double(0.0000000100000002).absDiffEq(Double(0.0000000100000001)))
+        XCTAssert(Double(0.0000000100000001).absDiffNe(Double(0.0000000010000002)))
+        XCTAssert(Double(0.0000000100000002).absDiffNe(Double(0.0000000010000001)))
+    }
+
+    func testSmallNeg() {
+        XCTAssert(Double(-0.0000000100000001).absDiffEq(Double(-0.0000000100000002)))
+        XCTAssert(Double(-0.0000000100000002).absDiffEq(Double(-0.0000000100000001)))
+        XCTAssert(Double(-0.0000000100000001).absDiffNe(Double(-0.0000000010000002)))
+        XCTAssert(Double(-0.0000000100000002).absDiffNe(Double(-0.0000000010000001)))
+    }
+
+    func testZero() {
+        XCTAssert(Double(0.0).absDiffEq(Double(0.0)))
+        XCTAssert(Double(0.0).absDiffEq(Double(-0.0)))
+        XCTAssert(Double(-0.0).absDiffEq(Double(-0.0)))
+
+        XCTAssert(Double(0.000000000000001).absDiffNe(Double(0.0)))
+        XCTAssert(Double(0.0).absDiffNe(Double(0.000000000000001)))
+        XCTAssert(Double(-0.000000000000001).absDiffNe(Double(0.0)))
+        XCTAssert(Double(0.0).absDiffNe(Double(-0.000000000000001)))
+    }
+
+    func testTolerance() {
+        XCTAssert(Double(0.0).absDiffEq(Double(1e-40), tolerance: 1e-40))
+        XCTAssert(Double(1e-40).absDiffEq(Double(0.0), tolerance: 1e-40))
+        XCTAssert(Double(0.0).absDiffEq(Double(-1e-40), tolerance: 1e-40))
+        XCTAssert(Double(-1e-40).absDiffEq(Double(0.0), tolerance: 1e-40))
+
+        XCTAssert(Double(1e-40).absDiffNe(Double(0.0), tolerance: 1e-41))
+        XCTAssert(Double(0.0).absDiffNe(Double(1e-40), tolerance: 1e-41))
+        XCTAssert(Double(-1e-40).absDiffNe(Double(0.0), tolerance: 1e-41))
+        XCTAssert(Double(0.0).absDiffNe(Double(-1e-40), tolerance: 1e-41))
+    }
+
+    func testMax() {
+        XCTAssert(Double.greatestFiniteMagnitude.absDiffEq(Double.greatestFiniteMagnitude))
+        XCTAssert(Double.greatestFiniteMagnitude.absDiffNe(-Double.greatestFiniteMagnitude))
+        XCTAssert((-Double.greatestFiniteMagnitude).absDiffNe(Double.greatestFiniteMagnitude))
+        XCTAssert(Double.greatestFiniteMagnitude.absDiffNe(Double.greatestFiniteMagnitude / Double(2.0)))
+        XCTAssert(Double.greatestFiniteMagnitude.absDiffNe(-Double.greatestFiniteMagnitude / Double(2.0)))
+        XCTAssert((-Double.greatestFiniteMagnitude).absDiffNe(Double.greatestFiniteMagnitude / Double(2.0)))
+    }
+
+    func testNAN() {
+        XCTAssert(Double.nan.absDiffNe(Double.nan))
+
+        XCTAssert(Double.nan.absDiffNe(Double(0.0)))
+        XCTAssert(Double(-0.0).absDiffNe(Double.nan))
+        XCTAssert(Double.nan.absDiffNe(Double(-0.0)))
+        XCTAssert(Double(0.0).absDiffNe(Double.nan))
+
+        XCTAssert(Double.nan.absDiffNe(Double.infinity))
+        XCTAssert(Double.infinity.absDiffNe(Double.nan))
+        XCTAssert(Double.nan.absDiffNe(-Double.infinity))
+        XCTAssert((-Double.infinity).absDiffNe(Double.nan))
+
+        XCTAssert(Double.nan.absDiffNe(Double.greatestFiniteMagnitude))
+        XCTAssert(Double.greatestFiniteMagnitude.absDiffNe(Double.nan))
+        XCTAssert(Double.nan.absDiffNe(-Double.greatestFiniteMagnitude))
+        XCTAssert((-Double.greatestFiniteMagnitude).absDiffNe(Double.nan))
+
+        XCTAssert(Double.nan.absDiffNe(Double.leastNonzeroMagnitude))
+        XCTAssert(Double.leastNonzeroMagnitude.absDiffNe(Double.nan))
+        XCTAssert(Double.nan.absDiffNe(-Double.leastNonzeroMagnitude))
+        XCTAssert((-Double.leastNonzeroMagnitude).absDiffNe(Double.nan))
+    }
+
+    func testOppositeSigns() {
+        XCTAssert(Double(1.000000001).absDiffNe(Double(-1.0)))
+        XCTAssert(Double(-1.0).absDiffNe(Double(1.000000001)))
+        XCTAssert(Double(-1.000000001).absDiffNe(Double(1.0)))
+        XCTAssert(Double(1.0).absDiffNe(Double(-1.000000001)))
+
+        XCTAssert((10.0 * Double.leastNonzeroMagnitude).absDiffEq(10.0 * -Double.leastNonzeroMagnitude))
+    }
+
+    func testCloseToZero() {
+        XCTAssert(Double.leastNonzeroMagnitude.absDiffEq(Double.leastNonzeroMagnitude))
+        XCTAssert(Double.leastNonzeroMagnitude.absDiffEq(-Double.leastNonzeroMagnitude))
+        XCTAssert((-Double.leastNonzeroMagnitude).absDiffEq(Double.leastNonzeroMagnitude))
+
+        XCTAssert(Double.leastNonzeroMagnitude.absDiffEq(Double(0.0)))
+        XCTAssert(Double(0.0).absDiffEq(Double.leastNonzeroMagnitude))
+        XCTAssert((-Double.leastNonzeroMagnitude).absDiffEq(Double(0.0)))
+        XCTAssert(Double(0.0).absDiffEq(-Double.leastNonzeroMagnitude))
+
+        XCTAssert(Double(0.000000000000001).absDiffNe(-Double.leastNonzeroMagnitude))
+        XCTAssert(Double(0.000000000000001).absDiffNe(Double.leastNonzeroMagnitude))
+        XCTAssert(Double.leastNonzeroMagnitude.absDiffNe(Double(0.000000000000001)))
+        XCTAssert((-Double.leastNonzeroMagnitude).absDiffNe(Double(0.000000000000001)))
+    }
+}
