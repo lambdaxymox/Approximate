@@ -18,7 +18,7 @@ let package = Package(
             name: "Approximate",
             dependencies: [],
             path: ".",
-            exclude: ["README.md", "Tests", "LICENSE-APACHE", "LICENSE-MIT"],
+            exclude: ["README.md", "Tests", "LICENSE-APACHE", "LICENSE-MIT", "TODO.md"],
             sources: ["Sources"]),
         .testTarget(
             name: "ApproximateTests",
