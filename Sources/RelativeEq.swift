@@ -161,3 +161,241 @@ where
     }
 }
 
+extension SIMD2: RelativeEq
+where
+    Scalar: RelativeEq,
+    Scalar: FloatingPoint
+{
+    public static var defaultMaxRelative: Scalar.Tolerance {
+        get {
+            Scalar.defaultMaxRelative
+        }
+    }
+    
+    public func relativeEq(
+        _ other: SIMD2<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance,
+        maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
+    {
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].relativeEq(other[i], tolerance: tolerance, maxRelative: maxRelative)
+        }
+        
+        return result
+    }
+    
+    public func relativeNe(
+        _ other: SIMD2<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance,
+        maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
+    {
+        !self.relativeEq(other, tolerance: tolerance, maxRelative: maxRelative)
+    }
+}
+
+extension SIMD3: RelativeEq
+where
+    Scalar: RelativeEq,
+    Scalar: FloatingPoint
+{
+    public static var defaultMaxRelative: Scalar.Tolerance {
+        get {
+            Scalar.defaultMaxRelative
+        }
+    }
+    
+    public func relativeEq(
+        _ other: SIMD3<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance,
+        maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
+    {
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].relativeEq(other[i], tolerance: tolerance, maxRelative: maxRelative)
+        }
+        
+        return result
+    }
+    
+    public func relativeNe(
+        _ other: SIMD3<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance,
+        maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
+    {
+        !self.relativeEq(other, tolerance: tolerance, maxRelative: maxRelative)
+    }
+}
+
+extension SIMD4: RelativeEq
+where
+    Scalar: RelativeEq,
+    Scalar: FloatingPoint
+{
+    public static var defaultMaxRelative: Scalar.Tolerance {
+        get {
+            Scalar.defaultMaxRelative
+        }
+    }
+    
+    public func relativeEq(
+        _ other: SIMD4<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance,
+        maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
+    {
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].relativeEq(other[i], tolerance: tolerance, maxRelative: maxRelative)
+        }
+        
+        return result
+    }
+    
+    public func relativeNe(
+        _ other: SIMD4<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance,
+        maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
+    {
+        !self.relativeEq(other, tolerance: tolerance, maxRelative: maxRelative)
+    }
+}
+
+extension SIMD8: RelativeEq
+where
+    Scalar: RelativeEq,
+    Scalar: FloatingPoint
+{
+    public static var defaultMaxRelative: Scalar.Tolerance {
+        get {
+            Scalar.defaultMaxRelative
+        }
+    }
+    
+    public func relativeEq(
+        _ other: SIMD8<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance,
+        maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
+    {
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].relativeEq(other[i], tolerance: tolerance, maxRelative: maxRelative)
+        }
+        
+        return result
+    }
+    
+    public func relativeNe(
+        _ other: SIMD8<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance,
+        maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
+    {
+        !self.relativeEq(other, tolerance: tolerance, maxRelative: maxRelative)
+    }
+}
+
+extension SIMD16: RelativeEq
+where
+    Scalar: RelativeEq,
+    Scalar: FloatingPoint
+{
+    public static var defaultMaxRelative: Scalar.Tolerance {
+        get {
+            Scalar.defaultMaxRelative
+        }
+    }
+    
+    public func relativeEq(
+        _ other: SIMD16<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance,
+        maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
+    {
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].relativeEq(other[i], tolerance: tolerance, maxRelative: maxRelative)
+        }
+        
+        return result
+    }
+    
+    public func relativeNe(
+        _ other: SIMD16<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance,
+        maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
+    {
+        !self.relativeEq(other, tolerance: tolerance, maxRelative: maxRelative)
+    }
+}
+
+extension SIMD32: RelativeEq
+where
+    Scalar: RelativeEq,
+    Scalar: FloatingPoint
+{
+    public static var defaultMaxRelative: Scalar.Tolerance {
+        get {
+            Scalar.defaultMaxRelative
+        }
+    }
+    
+    public func relativeEq(
+        _ other: SIMD32<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance,
+        maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
+    {
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].relativeEq(other[i], tolerance: tolerance, maxRelative: maxRelative)
+        }
+        
+        return result
+    }
+    
+    public func relativeNe(
+        _ other: SIMD32<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance,
+        maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
+    {
+        !self.relativeEq(other, tolerance: tolerance, maxRelative: maxRelative)
+    }
+}
+
+extension SIMD64: RelativeEq
+where
+    Scalar: RelativeEq,
+    Scalar: FloatingPoint
+{
+    public static var defaultMaxRelative: Scalar.Tolerance {
+        get {
+            Scalar.defaultMaxRelative
+        }
+    }
+    
+    public func relativeEq(
+        _ other: SIMD64<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance,
+        maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
+    {
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].relativeEq(other[i], tolerance: tolerance, maxRelative: maxRelative)
+        }
+        
+        return result
+    }
+    
+    public func relativeNe(
+        _ other: SIMD64<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance,
+        maxRelative: Scalar.Tolerance = defaultMaxRelative) -> Bool
+    {
+        !self.relativeEq(other, tolerance: tolerance, maxRelative: maxRelative)
+    }
+}
+

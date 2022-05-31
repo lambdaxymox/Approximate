@@ -115,7 +115,7 @@ extension UInt: AbsDiffEq {
 }
 
 extension Int8: AbsDiffEq {
-    public typealias Tolerance = Int8;
+    public typealias Tolerance = Int8
     
     public static var defaultTolerance: Int8 { get { 0 } }
 
@@ -129,7 +129,7 @@ extension Int8: AbsDiffEq {
 }
 
 extension Int16: AbsDiffEq {
-    public typealias Tolerance = Int16;
+    public typealias Tolerance = Int16
     
     public static var defaultTolerance: Int16 { get { 0 } }
 
@@ -143,7 +143,7 @@ extension Int16: AbsDiffEq {
 }
 
 extension Int32: AbsDiffEq {
-    public typealias Tolerance = Int32;
+    public typealias Tolerance = Int32
     
     public static var defaultTolerance: Int32 { get { 0 } }
 
@@ -157,7 +157,7 @@ extension Int32: AbsDiffEq {
 }
 
 extension Int64: AbsDiffEq {
-    public typealias Tolerance = Int64;
+    public typealias Tolerance = Int64
     
     public static var defaultTolerance: Int64 { get { 0 } }
 
@@ -171,7 +171,7 @@ extension Int64: AbsDiffEq {
 }
 
 extension Int: AbsDiffEq {
-    public typealias Tolerance = Int;
+    public typealias Tolerance = Int
     
     public static var defaultTolerance: Int { get { 0 } }
 
@@ -185,7 +185,7 @@ extension Int: AbsDiffEq {
 }
 
 extension Float: AbsDiffEq {
-    public typealias Tolerance = Float;
+    public typealias Tolerance = Float
     
     public static var defaultTolerance: Float { get { Float.ulpOfOne } }
 
@@ -199,7 +199,7 @@ extension Float: AbsDiffEq {
 }
 
 extension Double: AbsDiffEq {
-    public typealias Tolerance = Double;
+    public typealias Tolerance = Double
     
     public static var defaultTolerance: Double { get { Double.ulpOfOne } }
 
@@ -216,7 +216,7 @@ extension Array: AbsDiffEq
 where
     Element: AbsDiffEq
 {
-    public typealias Tolerance = Element.Tolerance;
+    public typealias Tolerance = Element.Tolerance
     
     public static var defaultTolerance: Element.Tolerance {
         get {
@@ -236,6 +236,244 @@ where
     public func absDiffNe(
         _ other: Array<Element>,
         tolerance: Element.Tolerance = defaultTolerance) -> Bool
+    {
+        !self.absDiffEq(other, tolerance: tolerance)
+    }
+}
+
+extension SIMD2: AbsDiffEq
+where
+    Scalar: AbsDiffEq,
+    Scalar: FloatingPoint
+{
+    public typealias Tolerance = Scalar.Tolerance
+    
+    public static var defaultTolerance: Scalar.Tolerance {
+        get {
+            Scalar.defaultTolerance
+        }
+    }
+    
+    public func absDiffEq(
+        _ other: SIMD2<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
+    {
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
+        }
+        
+        return result
+    }
+    
+    public func absDiffNe(
+        _ other: SIMD2<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
+    {
+        !self.absDiffEq(other, tolerance: tolerance)
+    }
+}
+
+extension SIMD3: AbsDiffEq
+where
+    Scalar: AbsDiffEq,
+    Scalar: FloatingPoint
+{
+    public typealias Tolerance = Scalar.Tolerance
+    
+    public static var defaultTolerance: Scalar.Tolerance {
+        get {
+            Scalar.defaultTolerance
+        }
+    }
+    
+    public func absDiffEq(
+        _ other: SIMD3<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
+    {
+        // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
+        }
+        
+        return result
+    }
+    
+    public func absDiffNe(
+        _ other: SIMD3<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
+    {
+        !self.absDiffEq(other, tolerance: tolerance)
+    }
+}
+
+extension SIMD4: AbsDiffEq
+where
+    Scalar: AbsDiffEq,
+    Scalar: FloatingPoint
+{
+    public typealias Tolerance = Scalar.Tolerance
+    
+    public static var defaultTolerance: Scalar.Tolerance {
+        get {
+            Scalar.defaultTolerance
+        }
+    }
+    
+    public func absDiffEq(
+        _ other: SIMD4<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
+    {
+        // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
+        }
+        
+        return result
+    }
+    
+    public func absDiffNe(
+        _ other: SIMD4<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
+    {
+        !self.absDiffEq(other, tolerance: tolerance)
+    }
+}
+
+extension SIMD8: AbsDiffEq
+where
+    Scalar: AbsDiffEq,
+    Scalar: FloatingPoint
+{
+    public typealias Tolerance = Scalar.Tolerance
+    
+    public static var defaultTolerance: Scalar.Tolerance {
+        get {
+            Scalar.defaultTolerance
+        }
+    }
+    
+    public func absDiffEq(
+        _ other: SIMD8<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
+    {
+        // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
+        }
+        
+        return result
+    }
+    
+    public func absDiffNe(
+        _ other: SIMD8<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
+    {
+        !self.absDiffEq(other, tolerance: tolerance)
+    }
+}
+
+extension SIMD16: AbsDiffEq
+where
+    Scalar: AbsDiffEq,
+    Scalar: FloatingPoint
+{
+    public typealias Tolerance = Scalar.Tolerance
+    
+    public static var defaultTolerance: Scalar.Tolerance {
+        get {
+            Scalar.defaultTolerance
+        }
+    }
+    
+    public func absDiffEq(
+        _ other: SIMD16<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
+    {
+        // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
+        }
+        
+        return result
+    }
+    
+    public func absDiffNe(
+        _ other: SIMD16<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
+    {
+        !self.absDiffEq(other, tolerance: tolerance)
+    }
+}
+
+extension SIMD32: AbsDiffEq
+where
+    Scalar: AbsDiffEq,
+    Scalar: FloatingPoint
+{
+    public typealias Tolerance = Scalar.Tolerance
+    
+    public static var defaultTolerance: Scalar.Tolerance {
+        get {
+            Scalar.defaultTolerance
+        }
+    }
+    
+    public func absDiffEq(
+        _ other: SIMD32<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
+    {
+        // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
+        }
+        
+        return result
+    }
+    
+    public func absDiffNe(
+        _ other: SIMD32<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
+    {
+        !self.absDiffEq(other, tolerance: tolerance)
+    }
+}
+
+extension SIMD64: AbsDiffEq
+where
+    Scalar: AbsDiffEq,
+    Scalar: FloatingPoint
+{
+    public typealias Tolerance = Scalar.Tolerance
+    
+    public static var defaultTolerance: Scalar.Tolerance {
+        get {
+            Scalar.defaultTolerance
+        }
+    }
+    
+    public func absDiffEq(
+        _ other: SIMD64<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
+    {
+        // PERFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].absDiffEq(other[i], tolerance: tolerance)
+        }
+        
+        return result
+    }
+    
+    public func absDiffNe(
+        _ other: SIMD64<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance) -> Bool
     {
         !self.absDiffEq(other, tolerance: tolerance)
     }

@@ -136,3 +136,227 @@ where
     }
 }
 
+extension SIMD2: UlpsEq
+where
+    Scalar: UlpsEq,
+    Scalar: FloatingPoint
+{
+    public static var defaultMaxUlps: UInt32 {
+        get {
+            Scalar.defaultMaxUlps
+        }
+    }
+    
+    public func ulpsEq(
+        _ other: SIMD2<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
+    {
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
+        }
+        
+        return result
+    }
+    
+    public func ulpsNe(
+        _ other: SIMD2<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
+    {
+        !self.ulpsEq(other, tolerance: tolerance, maxUlps: maxUlps)
+    }
+}
+
+extension SIMD3: UlpsEq
+where
+    Scalar: UlpsEq,
+    Scalar: FloatingPoint
+{
+    public static var defaultMaxUlps: UInt32 {
+        get {
+            Scalar.defaultMaxUlps
+        }
+    }
+    
+    public func ulpsEq(
+        _ other: SIMD3<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
+    {
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
+        }
+        
+        return result
+    }
+    
+    public func ulpsNe(
+        _ other: SIMD3<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
+    {
+        !self.ulpsEq(other, tolerance: tolerance, maxUlps: maxUlps)
+    }
+}
+
+extension SIMD4: UlpsEq
+where
+    Scalar: UlpsEq,
+    Scalar: FloatingPoint
+{
+    public static var defaultMaxUlps: UInt32 {
+        get {
+            Scalar.defaultMaxUlps
+        }
+    }
+    
+    public func ulpsEq(
+        _ other: SIMD4<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
+    {
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
+        }
+        
+        return result
+    }
+    
+    public func ulpsNe(
+        _ other: SIMD4<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
+    {
+        !self.ulpsEq(other, tolerance: tolerance, maxUlps: maxUlps)
+    }
+}
+
+extension SIMD8: UlpsEq
+where
+    Scalar: UlpsEq,
+    Scalar: FloatingPoint
+{
+    public static var defaultMaxUlps: UInt32 {
+        get {
+            Scalar.defaultMaxUlps
+        }
+    }
+    
+    public func ulpsEq(
+        _ other: SIMD8<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
+    {
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
+        }
+        
+        return result
+    }
+    
+    public func ulpsNe(
+        _ other: SIMD8<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
+    {
+        !self.ulpsEq(other, tolerance: tolerance, maxUlps: maxUlps)
+    }
+}
+
+extension SIMD16: UlpsEq
+where
+    Scalar: UlpsEq,
+    Scalar: FloatingPoint
+{
+    public static var defaultMaxUlps: UInt32 {
+        get {
+            Scalar.defaultMaxUlps
+        }
+    }
+    
+    public func ulpsEq(
+        _ other: SIMD16<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
+    {
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
+        }
+        
+        return result
+    }
+    
+    public func ulpsNe(
+        _ other: SIMD16<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
+    {
+        !self.ulpsEq(other, tolerance: tolerance, maxUlps: maxUlps)
+    }
+}
+
+extension SIMD32: UlpsEq
+where
+    Scalar: UlpsEq,
+    Scalar: FloatingPoint
+{
+    public static var defaultMaxUlps: UInt32 {
+        get {
+            Scalar.defaultMaxUlps
+        }
+    }
+    
+    public func ulpsEq(
+        _ other: SIMD32<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
+    {
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
+        }
+        
+        return result
+    }
+    
+    public func ulpsNe(
+        _ other: SIMD32<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
+    {
+        !self.ulpsEq(other, tolerance: tolerance, maxUlps: maxUlps)
+    }
+}
+
+extension SIMD64: UlpsEq
+where
+    Scalar: UlpsEq,
+    Scalar: FloatingPoint
+{
+    public static var defaultMaxUlps: UInt32 {
+        get {
+            Scalar.defaultMaxUlps
+        }
+    }
+    
+    public func ulpsEq(
+        _ other: SIMD64<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
+    {
+        // PEFORMANCE: Is Swift/LLVM smart enough to vectorize this loop?
+        var result = false
+        for i in 0...self.scalarCount {
+            result = result && self[i].ulpsEq(other[i], tolerance: tolerance, maxUlps: maxUlps)
+        }
+        
+        return result
+    }
+    
+    public func ulpsNe(
+        _ other: SIMD64<Scalar>,
+        tolerance: Scalar.Tolerance = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
+    {
+        !self.ulpsEq(other, tolerance: tolerance, maxUlps: maxUlps)
+    }
+}
+
