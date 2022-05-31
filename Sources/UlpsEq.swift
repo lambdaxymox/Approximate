@@ -35,6 +35,12 @@ extension Float: UlpsEq {
         _ other: Float,
         tolerance: Float = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
+        // Check whether the two numbers `self` and `other` are NaN. The sign test
+        // fails on NaNs.
+        if self.isNaN || other.isNaN {
+            return false
+        }
+    
         // First check whether the two numbers `self` and `other` are really close
         // together.
         if self.absDiffEq(other, tolerance: tolerance) {
@@ -49,13 +55,13 @@ extension Float: UlpsEq {
         }
 
         // Compare the two numbers by their bit patterns.
-        let bitsself: UInt32 = self.bitPattern
-        let bitsother: UInt32 = other.bitPattern
+        let bitsSelf: UInt32 = self.bitPattern
+        let bitsOther: UInt32 = other.bitPattern
 
-        if bitsself <= bitsother {
-            return (bitsother - bitsself) <= UInt32(maxUlps)
+        if bitsSelf <= bitsOther {
+            return (bitsOther - bitsSelf) <= UInt32(maxUlps)
         } else {
-            return (bitsself - bitsother) <= UInt32(maxUlps)
+            return (bitsSelf - bitsOther) <= UInt32(maxUlps)
         }
     }
     
@@ -76,7 +82,13 @@ extension Double: UlpsEq {
         _ other: Double,
         tolerance: Double = defaultTolerance, maxUlps: UInt32 = defaultMaxUlps) -> Bool
     {
-        // First check whether the two numbers `self` and `other` are really close
+        // Check whether the two numbers `self` and `other` are NaN. The sign test
+        // fails on NaNs.
+        if self.isNaN || other.isNaN {
+            return false
+        }
+        
+        // Check whether the two numbers `self` and `other` are really close
         // together.
         if self.absDiffEq(other, tolerance: tolerance) {
             return true
@@ -90,13 +102,13 @@ extension Double: UlpsEq {
         }
 
         // Compare the two numbers by their bit patterns.
-        let bitsself: UInt64 = self.bitPattern
-        let bitsother: UInt64 = other.bitPattern
+        let bitsSelf: UInt64 = self.bitPattern
+        let bitsOther: UInt64 = other.bitPattern
 
-        if bitsself <= bitsother {
-            return (bitsother - bitsself) <= UInt64(maxUlps)
+        if bitsSelf <= bitsOther {
+            return (bitsOther - bitsSelf) <= UInt64(maxUlps)
         } else {
-            return (bitsself - bitsother) <= UInt64(maxUlps)
+            return (bitsSelf - bitsOther) <= UInt64(maxUlps)
         }
     }
     
