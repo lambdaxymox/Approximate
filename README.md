@@ -25,6 +25,8 @@ and the following line to each of your desired targets
 For example, your Swift package manifest may look like
 ```swift
 // swift-tools-version:5.6
+import PackageDescription
+
 let package = Package(
     name: "my-app",
     dependencies: [
