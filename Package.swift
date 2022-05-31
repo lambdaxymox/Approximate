@@ -7,6 +7,7 @@ let package = Package(
     products: [
         .library(
             name: "Approximate",
+            type: .static,
             targets: ["Approximate"]),
     ],
     dependencies: [

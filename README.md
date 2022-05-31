@@ -3,14 +3,45 @@
 Approximate floating point equality comparisons for the Swift Programming Language.
 
 ## Introduction
-This Swift package provides implementations of floating point comparisons for the Swift 
-ecosystem. It is generally not correct behavior to compare two floating point numbers 
-for equality or inequality using exact equality comparisons, due to the imprecise 
-nature of floating point arithmetic. In its place one uses approximate comparisons 
-instead. Floating point numbers are counter-intuitive creatures, so we need to
-approach them differently than integer or rational numbers.
+**Approximate** is a Swift package provides implementations of floating point comparisons 
+for the Swift ecosystem. It is generally not correct behavior to compare two floating 
+point numbers for equality or inequality using exact equality comparisons, due to the 
+imprecise nature of floating point arithmetic. In its place one uses approximate 
+comparisons instead. Floating point numbers are counter-intuitive creatures, so one needs 
+to approach them differently than integers.
 
 ## Usage
+To use **Approximate** in your projects, add the followoing line to the **dependencies**
+list in your swift package manifest
+```swift
+dependencies: [
+    .package(url: "https://github.com/lambdaxymox/Approximate", .branch("master")),
+]
+```
+and the following line to each of your desired targets
+```swift
+.product(name: "Approximate", package: "Approximate")
+```
+For example, your Swift package manifest may look like
+```swift
+// swift-tools-version:5.6
+let package = Package(
+    name: "my-app",
+    dependencies: [
+        .package(url: "https://github.com/lambdaxymox/Approximate", .branch("master")),
+    ],
+    targets: [
+        .target(name: "my-app", dependencies: [
+            .product(name: "Approximate", package: "Approximate"),
+        ]),
+    ]
+)
+```
+Finally import the library
+```swift
+import Approximate
+```
+and use it in your project.
 
 ## Features
 This library provides the three standard forms of approximate equality 
