@@ -3,57 +3,57 @@ import XCTest
 
 
 final class AbsDiffEqFloatTests: XCTestCase {
-    func testBasicEq() {
+    func testBasicEq() throws {
         XCTAssert(absDiffEq(Float(1.0), Float(1.0)))
     }
 
-    func testBasicNe() {
+    func testBasicNe() throws {
         XCTAssert(absDiffNe(Float(1.0), Float(2.0)))
     }
 
-    func testBig() {
+    func testBig() throws {
         XCTAssert(absDiffEq(Float(100000000.0), Float(100000001.0)))
         XCTAssert(absDiffEq(Float(100000001.0), Float(100000000.0)))
         XCTAssert(absDiffNe(Float(10000.0), Float(10001.0)))
         XCTAssert(absDiffNe(Float(10001.0), Float(10000.0)))
     }
 
-    func testBigNeg() {
+    func testBigNeg() throws {
         XCTAssert(absDiffEq(Float(-100000000.0), Float(-100000001.0)))
         XCTAssert(absDiffEq(Float(-100000001.0), Float(-100000000.0)))
         XCTAssert(absDiffNe(Float(-10000.0), Float(-10001.0)))
         XCTAssert(absDiffNe(Float(-10001.0), Float(-10000.0)))
     }
 
-    func testMid() {
+    func testMid() throws {
         XCTAssert(absDiffEq(Float(1.0000001), Float(1.0000002)))
         XCTAssert(absDiffEq(Float(1.0000002), Float(1.0000001)))
         XCTAssert(absDiffNe(Float(1.000001), Float(1.000002)))
         XCTAssert(absDiffNe(Float(1.000002), Float(1.000001)))
     }
 
-    func testMidNeg() {
+    func testMidNeg() throws {
         XCTAssert(absDiffEq(Float(-1.0000001), Float(-1.0000002)))
         XCTAssert(absDiffEq(Float(-1.0000002), Float(-1.0000001)))
         XCTAssert(absDiffNe(Float(-1.000001), Float(-1.000002)))
         XCTAssert(absDiffNe(Float(-1.000002), Float(-1.000001)))
     }
 
-    func testSmall() {
+    func testSmall() throws {
         XCTAssert(absDiffEq(Float(0.000010001), Float(0.000010002)))
         XCTAssert(absDiffEq(Float(0.000010002), Float(0.000010001)))
         XCTAssert(absDiffNe(Float(0.000001002), Float(0.0000001001)))
         XCTAssert(absDiffNe(Float(0.000001001), Float(0.0000001002)))
     }
 
-    func testSmallNeg() {
+    func testSmallNeg() throws {
         XCTAssert(absDiffEq(Float(-0.000010001), Float(-0.000010002)))
         XCTAssert(absDiffEq(Float(-0.000010002), Float(-0.000010001)))
         XCTAssert(absDiffNe(Float(-0.000001002), Float(-0.0000001001)))
         XCTAssert(absDiffNe(Float(-0.000001001), Float(-0.0000001002)))
     }
 
-    func testZero() {
+    func testZero() throws {
         XCTAssert(absDiffEq(Float(0.0), Float(0.0)))
         XCTAssert(absDiffEq(Float(0.0), Float(-0.0)))
         XCTAssert(absDiffEq(Float(-0.0), Float(-0.0)))
@@ -64,7 +64,7 @@ final class AbsDiffEqFloatTests: XCTestCase {
         XCTAssert(absDiffNe(Float(0.0), Float(-0.000001)))
     }
 
-    func testTolerance() {
+    func testTolerance() throws {
         XCTAssert(absDiffEq(Float(0.0), Float(1e-40), tolerance: 1e-40))
         XCTAssert(absDiffEq(Float(1e-40), Float(0.0), tolerance: 1e-40))
         XCTAssert(absDiffEq(Float(0.0), Float(-1e-40), tolerance: 1e-40))
@@ -76,7 +76,7 @@ final class AbsDiffEqFloatTests: XCTestCase {
         XCTAssert(absDiffNe(Float(0.0), Float(-1e-40), tolerance: 1e-41))
     }
 
-    func testMax() {
+    func testMax() throws {
         XCTAssert(absDiffEq(Float.greatestFiniteMagnitude, Float.greatestFiniteMagnitude))
         XCTAssert(absDiffNe(Float.greatestFiniteMagnitude, -Float.greatestFiniteMagnitude))
         XCTAssert(absDiffNe((-Float.greatestFiniteMagnitude), Float.greatestFiniteMagnitude))
@@ -85,7 +85,7 @@ final class AbsDiffEqFloatTests: XCTestCase {
         XCTAssert(absDiffNe(-Float.greatestFiniteMagnitude, Float.greatestFiniteMagnitude / Float(2.0)))
     }
 
-    func testNAN() {
+    func testNAN() throws {
         XCTAssert(absDiffNe(Float.nan, Float.nan))
 
         XCTAssert(absDiffNe(Float.nan, Float(0.0)))
@@ -110,7 +110,7 @@ final class AbsDiffEqFloatTests: XCTestCase {
     }
 
 
-    func testOppositeSigns() {
+    func testOppositeSigns() throws {
         XCTAssert(absDiffNe(Float(1.000000001), Float(-1.0)))
         XCTAssert(absDiffNe(Float(-1.0), Float(1.000000001)))
         XCTAssert(absDiffNe(Float(-1.000000001), Float(1.0)))
@@ -122,7 +122,7 @@ final class AbsDiffEqFloatTests: XCTestCase {
     }
 
 
-    func testCloseToZero() {
+    func testCloseToZero() throws {
         XCTAssert(absDiffEq(Float.leastNonzeroMagnitude, Float.leastNonzeroMagnitude))
         XCTAssert(absDiffEq(Float.leastNonzeroMagnitude, -Float.leastNonzeroMagnitude))
         XCTAssert(absDiffEq(-Float.leastNonzeroMagnitude, Float.leastNonzeroMagnitude))
@@ -141,57 +141,57 @@ final class AbsDiffEqFloatTests: XCTestCase {
 
 
 final class AbsDiffEqDoubleTests: XCTestCase {
-    func testBasicEq() {
+    func testBasicEq() throws {
         XCTAssert(absDiffEq(Double(1.0), Double(1.0)))
     }
 
-    func testBasicNe() {
+    func testBasicNe() throws {
         XCTAssert(absDiffNe(Double(1.0), Double(2.0)))
     }
 
-    func testBig() {
+    func testBig() throws {
         XCTAssert(absDiffEq(Double(10000000000000000.0), Double(10000000000000001.0)))
         XCTAssert(absDiffEq(Double(10000000000000001.0), Double(10000000000000000.0)))
         XCTAssert(absDiffNe(Double(1000000000000000.0), Double(1000000000000001.0)))
         XCTAssert(absDiffNe(Double(1000000000000001.0), Double(1000000000000000.0)))
     }
 
-    func testBigNeg() {
+    func testBigNeg() throws {
         XCTAssert(absDiffEq(Double(-10000000000000000.0), Double(-10000000000000001.0)))
         XCTAssert(absDiffEq(Double(-10000000000000001.0), Double(-10000000000000000.0)))
         XCTAssert(absDiffNe(Double(-1000000000000000.0), Double(-1000000000000001.0)))
         XCTAssert(absDiffNe(Double(-1000000000000001.0), Double(-1000000000000000.0)))
     }
 
-    func testMid() {
+    func testMid() throws {
         XCTAssert(absDiffEq(Double(1.0000000000000001), Double(1.0000000000000002)))
         XCTAssert(absDiffEq(Double(1.0000000000000002), Double(1.0000000000000001)))
         XCTAssert(absDiffNe(Double(1.000000000000001), Double(1.000000000000002)))
         XCTAssert(absDiffNe(Double(1.000000000000002), Double(1.000000000000001)))
     }
 
-    func testMidNeg() {
+    func testMidNeg() throws {
         XCTAssert(absDiffEq(Double(-1.0000000000000001), Double(-1.0000000000000002)))
         XCTAssert(absDiffEq(Double(-1.0000000000000002), Double(-1.0000000000000001)))
         XCTAssert(absDiffNe(Double(-1.000000000000001), Double(-1.000000000000002)))
         XCTAssert(absDiffNe(Double(-1.000000000000002), Double(-1.000000000000001)))
     }
 
-    func testSmall() {
+    func testSmall() throws {
         XCTAssert(absDiffEq(Double(0.0000000100000001), Double(0.0000000100000002)))
         XCTAssert(absDiffEq(Double(0.0000000100000002), Double(0.0000000100000001)))
         XCTAssert(absDiffNe(Double(0.0000000100000001), Double(0.0000000010000002)))
         XCTAssert(absDiffNe(Double(0.0000000100000002), Double(0.0000000010000001)))
     }
 
-    func testSmallNeg() {
+    func testSmallNeg() throws {
         XCTAssert(absDiffEq(Double(-0.0000000100000001), Double(-0.0000000100000002)))
         XCTAssert(absDiffEq(Double(-0.0000000100000002), Double(-0.0000000100000001)))
         XCTAssert(absDiffNe(Double(-0.0000000100000001), Double(-0.0000000010000002)))
         XCTAssert(absDiffNe(Double(-0.0000000100000002), Double(-0.0000000010000001)))
     }
 
-    func testZero() {
+    func testZero() throws {
         XCTAssert(absDiffEq(Double(0.0), Double(0.0)))
         XCTAssert(absDiffEq(Double(0.0), Double(-0.0)))
         XCTAssert(absDiffEq(Double(-0.0), Double(-0.0)))
@@ -202,7 +202,7 @@ final class AbsDiffEqDoubleTests: XCTestCase {
         XCTAssert(absDiffNe(Double(0.0), Double(-0.000000000000001)))
     }
 
-    func testTolerance() {
+    func testTolerance() throws {
         XCTAssert(absDiffEq(Double(0.0), Double(1e-40), tolerance: 1e-40))
         XCTAssert(absDiffEq(Double(1e-40), Double(0.0), tolerance: 1e-40))
         XCTAssert(absDiffEq(Double(0.0), Double(-1e-40), tolerance: 1e-40))
@@ -214,7 +214,7 @@ final class AbsDiffEqDoubleTests: XCTestCase {
         XCTAssert(absDiffNe(Double(0.0), Double(-1e-40), tolerance: 1e-41))
     }
 
-    func testMax() {
+    func testMax() throws {
         XCTAssert(absDiffEq(Double.greatestFiniteMagnitude, Double.greatestFiniteMagnitude))
         XCTAssert(absDiffNe(Double.greatestFiniteMagnitude, -Double.greatestFiniteMagnitude))
         XCTAssert(absDiffNe(-Double.greatestFiniteMagnitude, Double.greatestFiniteMagnitude))
@@ -223,7 +223,7 @@ final class AbsDiffEqDoubleTests: XCTestCase {
         XCTAssert(absDiffNe(-Double.greatestFiniteMagnitude, Double.greatestFiniteMagnitude / Double(2.0)))
     }
 
-    func testNAN() {
+    func testNAN() throws {
         XCTAssert(absDiffNe(Double.nan, Double.nan))
 
         XCTAssert(absDiffNe(Double.nan, Double(0.0)))
@@ -247,7 +247,7 @@ final class AbsDiffEqDoubleTests: XCTestCase {
         XCTAssert(absDiffNe(-Double.leastNonzeroMagnitude, Double.nan))
     }
 
-    func testOppositeSigns() {
+    func testOppositeSigns() throws {
         XCTAssert(absDiffNe(Double(1.000000001), Double(-1.0)))
         XCTAssert(absDiffNe(Double(-1.0), Double(1.000000001)))
         XCTAssert(absDiffNe(Double(-1.000000001), Double(1.0)))
@@ -259,7 +259,7 @@ final class AbsDiffEqDoubleTests: XCTestCase {
         ))
     }
 
-    func testCloseToZero() {
+    func testCloseToZero() throws {
         XCTAssert(absDiffEq(Double.leastNonzeroMagnitude, Double.leastNonzeroMagnitude))
         XCTAssert(absDiffEq(Double.leastNonzeroMagnitude, -Double.leastNonzeroMagnitude))
         XCTAssert(absDiffEq(-Double.leastNonzeroMagnitude, Double.leastNonzeroMagnitude))
@@ -278,45 +278,45 @@ final class AbsDiffEqDoubleTests: XCTestCase {
 
 
 final class AbsDiffSimdTest: XCTestCase {
-    func testBasicEqSimd2() {
+    func testBasicEqSimd2() throws {
         XCTAssert(absDiffEq(SIMD2(1.0, 1.0), SIMD2(1.0, 1.0)))
     }
     
-    func testBasicNeSimd2() {
+    func testBasicNeSimd2() throws {
         XCTAssert(absDiffNe(SIMD2(1.0, 1.0), SIMD2(2.0, 3.0)))
     }
     
-    func testBasicEqSimd3() {
+    func testBasicEqSimd3() throws {
         XCTAssert(absDiffEq(SIMD3(1.0, 1.0, 1.0), SIMD3(1.0, 1.0, 1.0)))
     }
     
-    func testBasicNeSimd3() {
+    func testBasicNeSimd3() throws {
         XCTAssert(absDiffNe(SIMD3(1.0, 1.0, 1.0), SIMD3(2.0, 3.0, 4.0)))
     }
     
-    func testBasicEqSimd4() {
+    func testBasicEqSimd4() throws {
         XCTAssert(absDiffEq(SIMD4(1.0, 1.0, 1.0, 1.0), SIMD4(1.0, 1.0, 1.0, 1.0)))
     }
     
-    func testBasicNeSimd4() {
+    func testBasicNeSimd4() throws {
         XCTAssert(absDiffNe(SIMD4(1.0, 1.0, 1.0, 1.0), SIMD4(2.0, 3.0, 4.0, 5.0)))
     }
     
-    func testBasicEqSimd8() {
+    func testBasicEqSimd8() throws {
         XCTAssert(absDiffEq(
             SIMD8(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0),
             SIMD8(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0)
         ))
     }
     
-    func testBasicNeSimd8() {
+    func testBasicNeSimd8() throws {
         XCTAssert(absDiffNe(
             SIMD8(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0),
             SIMD8(2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0)
         ))
     }
     
-    func testBasicEqSimd16() {
+    func testBasicEqSimd16() throws {
         XCTAssert(absDiffEq(
             SIMD16(
                 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
@@ -329,7 +329,7 @@ final class AbsDiffSimdTest: XCTestCase {
         ))
     }
     
-    func testBasicNeSimd16() {
+    func testBasicNeSimd16() throws {
         XCTAssert(absDiffNe(
             SIMD16(
                 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
@@ -342,7 +342,7 @@ final class AbsDiffSimdTest: XCTestCase {
         ))
     }
     
-    func testBasicEqSimd32() {
+    func testBasicEqSimd32() throws {
         XCTAssert(absDiffEq(
             SIMD32(
                 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
@@ -359,7 +359,7 @@ final class AbsDiffSimdTest: XCTestCase {
         ))
     }
     
-    func testBasicNeSimd32() {
+    func testBasicNeSimd32() throws {
         XCTAssert(absDiffNe(
             SIMD32(
                 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
@@ -376,7 +376,7 @@ final class AbsDiffSimdTest: XCTestCase {
         ))
     }
     
-    func testBasicEqSimd64() {
+    func testBasicEqSimd64() throws {
         XCTAssert(absDiffEq(
             SIMD64(
                 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
@@ -401,7 +401,7 @@ final class AbsDiffSimdTest: XCTestCase {
         ))
     }
     
-    func testBasicNeSimd64() {
+    func testBasicNeSimd64() throws {
         XCTAssert(absDiffNe(
             SIMD64(
                 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
