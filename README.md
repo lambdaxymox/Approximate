@@ -1,7 +1,6 @@
 # Approximate
 
-Approximate floating point equality comparisons and assertions for the Swift 
-Programming Language.
+Approximate floating point equality comparisons for the Swift Programming Language.
 
 ## Introduction
 This Swift package provides implementations of floating point comparisons for the Swift 
