@@ -1,7 +1,14 @@
 import XCTest
 @testable import Approximate
 
-
+/// The test cases in this class are derived from
+/// ```
+/// https://github.com/brendanzab/approx/blob/master/tests/
+/// ```
+/// and
+/// ```
+/// https://github.com/Pybonacci/puntoflotante.org/blob/master/content/errors/NearlyEqualsTest.java
+/// ```
 final class AbsDiffEqFloatTests: XCTestCase {
     func testBasicEq() throws {
         XCTAssert(absDiffEq(Float(1.0), Float(1.0)))
@@ -140,6 +147,14 @@ final class AbsDiffEqFloatTests: XCTestCase {
 }
 
 
+/// The test cases in this class are derived from
+/// ```
+/// https://github.com/brendanzab/approx/blob/master/tests/
+/// ```
+/// and
+/// ```
+/// https://github.com/Pybonacci/puntoflotante.org/blob/master/content/errors/NearlyEqualsTest.java
+/// ```
 final class AbsDiffEqDoubleTests: XCTestCase {
     func testBasicEq() throws {
         XCTAssert(absDiffEq(Double(1.0), Double(1.0)))

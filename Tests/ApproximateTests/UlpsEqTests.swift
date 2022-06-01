@@ -2,6 +2,14 @@ import XCTest
 @testable import Approximate
 
 
+/// The test cases in this class are derived from
+/// ```
+/// https://github.com/brendanzab/approx/blob/master/tests/
+/// ```
+/// and
+/// ```
+/// https://github.com/Pybonacci/puntoflotante.org/blob/master/content/errors/NearlyEqualsTest.java
+/// ```
 final class UlpsEqFloatTests: XCTestCase {
     func testBasicEq() throws {
         XCTAssert(ulpsEq(Float(1.0), Float(1.0)))
@@ -155,6 +163,15 @@ final class UlpsEqFloatTests: XCTestCase {
     }
 }
 
+
+/// The test cases in this class are derived from
+/// ```
+/// https://github.com/brendanzab/approx/blob/master/tests/
+/// ```
+/// and
+/// ```
+/// https://github.com/Pybonacci/puntoflotante.org/blob/master/content/errors/NearlyEqualsTest.java
+/// ```
 final class UlpsEqDoubleTests: XCTestCase {
     func testBasicEq() throws {
         XCTAssert(ulpsEq(Double(1.0), Double(1.0)))
