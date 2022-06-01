@@ -11,7 +11,7 @@ comparisons instead. Floating point numbers are counterintuitive creatures, so o
 to approach them differently than integers.
 
 ## Usage
-To use **Approximate** in your projects, add the followoing line to the **dependencies**
+To use **Approximate** in your projects, add the following line to the dependencies
 list in your swift package manifest
 ```swift
 dependencies: [
@@ -30,7 +30,7 @@ import PackageDescription
 let package = Package(
     name: "my-app",
     dependencies: [
-        .package(url: "https://github.com/lambdaxymox/Approximate", .branch("master")),
+        .package(url: "https://github.com/lambdaxymox/Approximate", from: "1.0.1"),
     ],
     targets: [
         .target(name: "my-app", dependencies: [
@@ -56,3 +56,4 @@ tricky subtleties.
 - [Comparing Floating Point Numbers, 2012 Edition](https://randomascii.wordpress.com/2012/02/25/comparing-floating-point-numbers-2012-edition/)
 - [The Floating-Point Guide](https://floating-point-gui.de/errors/comparison/)
 - [What Every Computer Scientist Should Know About Floating-Point Arithmetic](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html)
+
